@@ -2,14 +2,15 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import user_passes_test
 from django.views import View
 from django.contrib import messages
 from .forms import UserSingupForm
+from .utils import is_staff
 
 
 def home_view(request):
     return render(request, 'templates/home.html')
-
 
 def signup_view(request):
     if request.method == 'POST':
@@ -26,16 +27,16 @@ def signup_view(request):
         form = UserSingupForm()
 
     context = {'form': form}
-    return render(request, 'customerTemplates/singupUser.html', context)
+    return render(request, 'userTemplates/singupUser.html', context)
 
 
 def login_view(request):
     if request.method == 'GET':
-        return render(request, 'customerTemplates/loginUser.html',{'form':AuthenticationForm})
+        return render(request, 'userTemplates/loginUser.html',{'form':AuthenticationForm})
     else:
         user = authenticate(request, username=request.POST['username'],password=request.POST['password'])
     if user is None:
-        return render(request,'customerTemplates/loginUser.html',{'form': AuthenticationForm(),'error': 'username and password do not match'})
+        return render(request,'userTemplates/loginUser.html',{'form': AuthenticationForm(),'error': 'username and password do not match'})
     else:
         login(request, user)
     return redirect('home')

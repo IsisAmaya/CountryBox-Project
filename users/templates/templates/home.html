@@ -1,13 +1,24 @@
 <!-- templates/home.html -->
-{% extends "templates/base.html" %}
-{% block content %}
+{% extends "templates/base.html" %} {% block content %}
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Home</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Welcome to the Home Page!</h1>
-</body>
+    {% if user.is_authenticated %} 
+        {% if user.is_staff %}
+        <!-- Contenido para el personal (staff) -->
+        <p>Bienvenido, personal.</p>
+        {% else %}
+        <!-- Contenido para los clientes -->
+        <p>Bienvenido, cliente.</p>
+        {% endif %} 
+    {% else %}
+    <!-- Contenido para los usuarios no autenticados -->
+    <p>Inicie sesión para ver el contenido.</p>
+    {% endif %}
+  </body>
 </html>
 {% endblock %}
