@@ -1,0 +1,48 @@
+{% extends "users/templates/templates/base.html" %}
+
+{% block content %}
+    <h2>Shopping Cart</h2>
+    {% if  user.is_authenticated %}
+        {% if user.is_staff %}    
+            {% if cart_items %}
+                <div class="customer-info box">
+                    <h3>Customer Information:</h3>
+                    <p>Name: {{ customUser.first_name }} {{ customUser.last_name }}</p>
+                    <p>Email: {{ customUser.email }}</p>
+                    <p>Phone: {{ customUser.phone }}</p>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total Price</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in cart_items %}
+                            <tr>
+                                <td>{{ item.product }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>{{ item.product.price }}</td>
+                                <td>{{ item.quantity * item.product.price }}</td>
+                                <td><a href="{% url 'cart:remove_from_cart' item.id %}">Remove</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3"></td>
+                            <td>Total:</td>
+                            <td>{{ total_price }}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <a href="{% url 'order' %}" class="btn btn-primary">Checkout</a>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+{% endblock %}

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "users",
+    "shoppingcart",
     "products",
 ]
 
@@ -56,7 +57,7 @@ ROOT_URLCONF = "countrybox.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, 'users', 'templates')],
+        "DIRS": [os.path.join(BASE_DIR, 'users', 'templates', "shoppingcart")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
