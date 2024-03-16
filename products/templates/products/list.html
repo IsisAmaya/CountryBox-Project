@@ -1,0 +1,37 @@
+{% extends "templates/base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+{% block content %}
+<body>
+    <div class="row ms-4 mt-5">
+        {% for product in products %}
+            <div class="col-md-4 col-lg-3 mb-2">
+                <div class="card">
+                    <img src="{{ product.image_product.url }}" class="card-img-top img-card">
+                    <div class="card-body text-center">
+                        <div class="row">
+                            <div class="mx-auto">
+                                <h5>{{product.name}}</h5>
+                            </div>
+                            <div class="mx-auto">
+                                <i>Id del Producto: </i>
+                                {{product.id}}
+                            </div>
+                        </div>
+{% comment %}                         <div class="mt-3">
+                            <a href="{% url 'details' id=product.id %}"
+                            class="btn bg-warning text-white">Detalles</a>
+                        </div> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+{% endblock %}
+</html>
