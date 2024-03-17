@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.views import View
 from django.contrib import messages
 from .forms import UserSingupForm
+from  shoppingcart.models import Cart
 from .utils import is_staff
 
 
@@ -16,8 +17,9 @@ def signup_view(request):
     if request.method == 'POST':
         form = UserSingupForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
             username = form.cleaned_data['username']
+            Cart.objects.create(customer=user)
             messages.success(request, f'Usuario {username} creado con éxito.')
             return redirect('home')
             
