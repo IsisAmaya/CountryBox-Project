@@ -24,10 +24,9 @@
                     <tbody>
                         {% for item in cart_items %}
                             <tr>
-                                <td>{{ item.product }}</td>
+                                <td>{{ item.Product }}</td>
                                 <td>{{ item.quantity }}</td>
-                                <td>{{ item.product.price }}</td>
-                                <td>{{ item.quantity * item.product.price }}</td>
+                                <td>{{ item.Product.price }}</td>
                                 <td><a href="{% url 'cart:remove_from_cart' item.id %}">Remove</a></td>
                             </tr>
                         {% endfor %}

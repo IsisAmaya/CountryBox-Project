@@ -1,28 +1,43 @@
 from django.contrib.sessions.models import Session
 from users.models import CustomUser
+from django.http import HttpRequest
 
 class ShoppingCart:
-    def __init__(self, session):
-        self.session = session
-        self.cart = self.session.get('cart', [])
-        self.customer = self.get_customer()
+    def __init__(self, request):
+        self.request = request
+        self.session = request.session
+        self.cart = self.get_cart()
 
-    def add_product(self, product):
-        self.cart.append(product)
-        self.session['cart'] = self.cart
+    def get_cart(self):
+        cart = self.session.get('cart', [])
+        return cart
+
+    def add_product(self, product_id, quantity):
+        cart = self.get_cart()
+        if not cart:
+            cart = []
+        if product_id not in cart:
+            cart.append({'id': product_id, 'quantity': quantity})
+        else:
+            for item in cart:
+                if item['id'] == product_id:
+                    item['quantity'] += quantity
+                    break
+        self.session['cart'] = cart
 
     def remove_product(self, product):
-        self.cart.remove(product)
-        self.session['cart'] = self.cart
+        cart = self.get_cart()
+        if product in cart:
+            del cart[product]
+            self.session['cart'] = cart
 
-    def get_products(self):
-        return self.cart
+    def get_cart_quantity(self):
+        cart = self.get_cart()
+        return sum(item['quantity'] for item in cart.values())
 
-    def get_total_price(self):
-        total_price = 0
-        for product in self.cart:
-            total_price += product['price'] * product['quantity']
-        return total_price
+    def get_cart_total_price(self):
+        cart = self.get_cart()
+        return sum(item['price'] * item['quantity'] for item in cart.values())
 
     def get_cart_id(self):
         return self.session.session_key
@@ -43,19 +58,4 @@ class ShoppingCart:
         customer = self.get_customer()
         if customer:
             return customer.address
-        return None
-
-    def get_customer_phone(self):
-        customer = self.get_customer()
-        if customer:
-            return customer.phone
-        return None
-
-    def get_customer_email(self):
-        customer = self.get_customer()
-        if customer:
-            return customer.email
-        return None
-
-    def get_cart_quantity(self):
-        return len(self.cart)
+        return

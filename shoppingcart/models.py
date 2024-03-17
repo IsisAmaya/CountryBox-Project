@@ -17,6 +17,10 @@ class CartItem(models.Model):
 
     def get_total_price(self):
         return self.product.price * self.quantity
+    
+    @classmethod
+    def all(cls):
+        return cls.objects.all()
 
 
 class Order(models.Model):

@@ -6,15 +6,30 @@ from .models import Cart, CartItem, Order
 from products.models import Product
 from users.models import CustomUser
 from users.utils import is_staff
+from django.http import HttpRequest, HttpResponse
 from django.contrib.auth.decorators import login_required, user_passes_test
-
 
 @login_required
 def cart(request):
     cart, created = Cart.objects.get_or_create(customer=request.user)
-    cart_items = CartItem.all()
-    customer = CustomUser.objects.get(id=request.session.get('customer_id'))
+    cart_items = CartItem.objects.filter(cart=cart)
+    customer_id = request.session.get('customer_id')
+    if customer_id:
+        customer = CustomUser.objects.get(id=customer_id)
+    else:
+        customer = None
     return render(request, 'cart.html', {'cart': cart, 'cart_items': cart_items, 'customer': customer})
+
+@login_required
+def add_to_cart(request, product_id):
+    cart = ShoppingCart(request)
+    if Product.objects.filter(id=product_id).exists():
+        quantity = int(request.POST.get('quantity', 1))
+        product = Product.objects.get(id=product_id)
+        cart.add_product(product_id, quantity)
+        return redirect('cart:cart')
+    else:
+        return HttpResponse("El producto no existe en la base de datos.")
 
 @login_required
 def remove_from_cart(request, product_id):
@@ -27,25 +42,23 @@ def remove_from_cart(request, product_id):
 @login_required
 def order(request):
     cart, created = Cart.objects.get_or_create(customer=request.user)
-    cart_items = CartItem.all()
-    delivery_address = None  # initialize delivery address variable
-    total_price = sum(item.get_total_price() for item in cart_items)  # calculate total price
+    cart_items = CartItem.objects.filter(cart=cart)
+    total_price = sum(item.get_total_price() for item in cart_items)
 
     if request.method == 'POST':
-        # handle form submission for delivery address
         delivery_address_form = DeliveryAddressForm(request.POST)
         if delivery_address_form.is_valid():
-            # save the delivery address to the user's profile
             delivery_address = delivery_address_form.save(commit=False)
             delivery_address.customer = request.user
             delivery_address.save()
 
             # calculate the final price including delivery fee
-            delivery_fee = 5.00  # assume a fixed delivery fee for simplicity
+            delivery_fee = 5.00  # assume a fixed delivery fee
             final_price = total_price + delivery_fee
 
             # create an order object with the cart, delivery address, and final price
             order = Order.objects.create(
+                cart=cart,
                 customer=request.user,
                 delivery_address=delivery_address,
                 total_price=final_price
