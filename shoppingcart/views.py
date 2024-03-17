@@ -1,41 +1,41 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .cart import ShoppingCart
+from .utils import ShoppingCart
 from .forms import DeliveryAddressForm
-from .models import Cart, CartItem, Order
+from .models import Cart, CartItem ,Order
 from products.models import Product
 from users.models import CustomUser
-from users.utils import is_staff
 from django.http import HttpRequest, HttpResponse
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 
 @login_required
 def cart(request):
-    cart, created = Cart.objects.get_or_create(customer=request.user)
-    cart_items = CartItem.objects.filter(cart=cart)
-    customer_id = request.session.get('customer_id')
-    if customer_id:
-        customer = CustomUser.objects.get(id=customer_id)
-    else:
-        customer = None
-    return render(request, 'cart.html', {'cart': cart, 'cart_items': cart_items, 'customer': customer})
+    customer_id = request.user.id
+    customer = CustomUser.objects.get(pk=customer_id)
+    cart, create = Cart.objects.get_or_create(customer=customer)
+    cart_items = CartItem.objects.filter(cart=cart.pk)
+    cart_item = ShoppingCart(request)
+    total_cart = cart_item.get_total(cart.pk)
+    return render(request, 'cart.html', {'cart': cart, 'cart_items': cart_items,'customer': customer, 'total': total_cart})
 
 @login_required
 def add_to_cart(request, product_id):
-    cart = ShoppingCart(request)
+    cart_item = ShoppingCart(request)
+    cart = cart_item.get_cart(request)
     if Product.objects.filter(id=product_id).exists():
         quantity = int(request.POST.get('quantity', 1))
-        product = Product.objects.get(id=product_id)
-        cart.add_product(product_id, quantity)
+        print(cart.pk)
+        cart_item.add_product(cart.id, product_id, quantity)
         return redirect('cart:cart')
     else:
         return HttpResponse("El producto no existe en la base de datos.")
 
 @login_required
 def remove_from_cart(request, product_id):
-    product = Product.objects.get(id=product_id)
-    cart = ShoppingCart(request.session)
-    cart.remove_product(product)
+    product = Product.objects.get(pk=product_id)
+    cart_item = ShoppingCart(request)
+    cart = cart_item.get_cart(request)
+    cart_item.remove_product(cart.pk ,product_id)
     messages.success(request, f'Producto "{product.name}" eliminado del carrito')
     return redirect('cart:cart')
 

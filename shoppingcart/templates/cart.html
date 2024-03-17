@@ -7,9 +7,9 @@
             {% if cart_items %}
                 <div class="customer-info box">
                     <h3>Customer Information:</h3>
-                    <p>Name: {{ customUser.first_name }} {{ customUser.last_name }}</p>
-                    <p>Email: {{ customUser.email }}</p>
-                    <p>Phone: {{ customUser.phone }}</p>
+                    <p>Name: {{ customer.username }}</p>
+                    <p>Email: {{ customer.email }}</p>
+                    <p>Phone: {{ customer.phone_number }}</p>
                 </div>
                 <table class="table">
                     <thead>
@@ -24,10 +24,10 @@
                     <tbody>
                         {% for item in cart_items %}
                             <tr>
-                                <td>{{ item.Product }}</td>
+                                <td>{{ item.product.name }}</td>
                                 <td>{{ item.quantity }}</td>
-                                <td>{{ item.Product.price }}</td>
-                                <td><a href="{% url 'cart:remove_from_cart' item.id %}">Remove</a></td>
+                                <td>{{ item.product.price }}</td>
+                                <td><a href="{% url 'cart:remove_from_cart' item.product.id %}">Remove</a></td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -35,12 +35,12 @@
                         <tr>
                             <td colspan="3"></td>
                             <td>Total:</td>
-                            <td>{{ total_price }}</td>
+                            <td>{{ total }}</td>
                         </tr>
                     </tfoot>
                 </table>
 
-                <a href="{% url 'order' %}" class="btn btn-primary">Checkout</a>
+                {% comment %} <a href="{% url 'order' %}" class="btn btn-primary">Checkout</a> {% endcomment %}
             {% endif %}
         {% endif %}
     {% endif %}

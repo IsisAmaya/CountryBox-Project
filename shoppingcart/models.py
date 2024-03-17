@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import CustomUser
+from products.models import Product
 
 
 class Cart(models.Model):
@@ -9,7 +10,7 @@ class Cart(models.Model):
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="items")
-    product = models.ForeignKey("products.Product", on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
 
     def __str__(self):
@@ -21,7 +22,6 @@ class CartItem(models.Model):
     @classmethod
     def all(cls):
         return cls.objects.all()
-
 
 class Order(models.Model):
     customer = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
