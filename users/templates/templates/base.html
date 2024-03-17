@@ -16,59 +16,35 @@
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
           <div class="col-md-3 mb-2 mb-md-0">
             <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-              <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+              <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#"/></svg>
             </a>
           </div>
     
           <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
-            <li><a href="#" class="nav-link px-2">Features</a></li>
-            <li><a href="#" class="nav-link px-2">Pricing</a></li>
-            <li><a href="#" class="nav-link px-2">FAQs</a></li>
-            <li><a href="#" class="nav-link px-2">About</a></li>
+            <li><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+            <li><a class="nav-link" href="{% url 'list' %}">Ver productos</a></li>
+            <li>
+            {% if  user.is_authenticated %}
+            {% if user.is_staff %}
+                <a class="nav-link" href="{% url 'create' %}">Crear Producto</a>
+            {% endif %}
+            {% endif %}
+            </li>
+
           </ul>
     
           <div class="col-md-3 text-end">
-            <button type="button" class="btn btn-outline-primary me-2">Login</button>
-            <button type="button" class="btn btn-primary">Sign-up</button>
+            {% if not user.is_authenticated %}
+            <a href="/user/login/"><button type="button" class="btn btn-outline-primary me-2">Ingresar</button></a>
+            {% else %}
+            <a href="{% url 'logout' %}"><button type="button" class="btn btn-outline-primary me-2">Salir</button></a>
+            {% endif %}
+            {% if not user.is_authenticated %}
+            <a href="{% url 'singup' %}"><button type="button" class="btn btn-primary">Registrarse</button></a>
+            {% endif %}
           </div>
         </header>
       </div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{% url 'home' %}">Country Box</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    {% if  user.is_authenticated %}
-                        {% if not user.is_staff %}
-                            <a class="nav-link" href="{% url 'create' %}">Crear Producto</a>
-                        {% endif %}
-                    {% endif %}
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'list' %}">Ver productos</a>
-                </li>
-                <li class="nav-item">
-                    {% if user.is_authenticated %}
-                    <a class="nav-link" href="{% url 'logout' %}">
-                        Salir
-                    </a>
-                    {% else %}
-                        <a class="nav-link" href="/user/login/">Ingresar</a>
-                    {% endif %}
-                </li>
-                <li class="nav-item">
-                    {% if not user.is_authenticated %}
-                    <a class="nav-link" href="{% url 'singup' %}">Registrarse</a>
-                    {% endif %}
-                </li>
-            </ul>            
-
-        </div>
-    </nav>
 
     <div class="container">
         {% block content %}

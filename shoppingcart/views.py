@@ -3,11 +3,12 @@ from django.contrib import messages
 from .cart import ShoppingCart
 from .forms import DeliveryAddressForm
 from .models import Cart, CartItem, Order
+from products.models import Product
 from users.models import CustomUser
 from users.utils import is_staff
 from django.contrib.auth.decorators import login_required, user_passes_test
 
-@user_passes_test(is_staff, login_url="/product/denied/")
+
 @login_required
 def cart(request):
     cart, created = Cart.objects.get_or_create(customer=request.user)

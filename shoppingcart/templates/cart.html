@@ -1,9 +1,9 @@
-{% extends "users/templates/templates/base.html" %}
+{% extends "templates/base.html" %}
 
 {% block content %}
     <h2>Shopping Cart</h2>
-    {% if  user.is_authenticated %}
-        {% if user.is_staff %}    
+    {% if user.is_authenticated %}
+        {% if not user.is_staff %}    
             {% if cart_items %}
                 <div class="customer-info box">
                     <h3>Customer Information:</h3>

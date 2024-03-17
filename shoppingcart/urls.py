@@ -5,6 +5,6 @@ from . import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('shoppingcart/cart/', views.cart, name='cart'),
-    path('shoppingcart/order/', views.order, name='order'),
+    path('cart/', views.cart, name='cart'),
+    path('order/', views.order, name='order'),
 ]
