@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponseForbidden
 from .models import Product
@@ -7,7 +7,6 @@ from users import views
 from users.utils import is_staff
 
 # Create your views here.
-
 
 @user_passes_test(is_staff, login_url="/product/denied/")
 def ProductCreateView(request):
@@ -21,10 +20,49 @@ def ProductCreateView(request):
         return render(request, 'products/create.html', { 'form': ProductForm})
 
 def ProductListView(request):
-    products = Product.objects.all()
+    orden = request.GET.get('orden')
+
+    if orden == 'desc':
+        products = Product.objects.all().order_by('-price')  # Orden descendente
+    elif orden == 'asc':
+        products = Product.objects.all().order_by('price')   # Orden ascendente o cualquier otro orden por defecto
+    else:
+        products = Product.objects.all()
     return render(request, "products/list.html", {"products": products})
 
+def ProductDetailsView(request, id):
+    if Product.objects.filter(id=int(id)).exists():
+        try:
+            product_id = int(id)
+            if product_id < 1:
+                raise ValueError("El id del producto debe ser mayor a 1")
+            product = get_object_or_404(Product, pk=product_id)
+        
+        except (ValueError, IndexError):
+            return redirect('home')
+    else:
+        return redirect('home')
+        
+    return render(request, 'products/details.html', { 'product': product })
 
+def ProductDelete(request, id):
+    if Product.objects.filter(id=int(id)).exists():
+        try:
+            product_id = int(id)
+            
+            if product_id < 1:
+                raise ValueError("El id del producto debe ser mayor a 1")
+            
+            product = get_object_or_404(Product, pk=product_id)
+            
+            product.delete()
+        
+        except (ValueError, IndexError):
+            return redirect('home')
+    else:
+        return redirect('home')
+        
+    return redirect('list')
 
 #------------Other Functions--------------------
 

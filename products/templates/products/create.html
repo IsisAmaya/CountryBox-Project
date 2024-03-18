@@ -8,15 +8,22 @@
   </head>
   {% block content %}
   <body>
-    <form method="POST">
-      {% csrf_token %}
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-4">
+          <form method="POST" class="row gy-2 gx-3 align-items-center" enctype="multipart/form-data">
+          {% csrf_token %}
 
-      {{ form  }}
+          {{ form  }}
 
-      <div class="d-grid gap-2 col-6 mx-auto">
-          <button class="btn btn-info" type="submit" style="background-color= #97D2FB;">Guardar</button>
+          <div class="d-grid gap-2 col-6 mx-auto">
+              <button class="btn btn-info mb-4" type="submit" style="background-color= #97D2FB;">Guardar</button>
+          </div>
+          </form>
+        </div>
       </div>
-      </form>
+    </div>
+
   </body>
   {% endblock %}
 </html>

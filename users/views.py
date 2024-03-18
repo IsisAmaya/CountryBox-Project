@@ -6,12 +6,29 @@ from django.contrib.auth.decorators import user_passes_test
 from django.views import View
 from django.contrib import messages
 from .forms import UserSingupForm
-from  shoppingcart.models import Cart
+from shoppingcart.models import Cart
+from products.models import Product
 from .utils import is_staff
+import random as rd
 
 
 def home_view(request):
-    return render(request, 'templates/home.html')
+    ids = list(Product.objects.values_list('id', flat=True))
+    print(f"Ids: {ids}")
+    
+    if len(ids) >= 3:
+        random_ids = rd.sample(ids, 3)
+        instancias = Product.objects.filter(id__in=random_ids)
+    else:
+        instancias = Product.objects.none()  
+    
+    random = Product.objects.order_by('?')[:4]
+    context = {
+        'obj_1' : instancias[0],
+        'obj_2' : instancias[1],
+        'obj_3' : instancias[2],
+    }
+    return render(request, 'templates/home.html', context)
 
 def signup_view(request):
     if request.method == 'POST':

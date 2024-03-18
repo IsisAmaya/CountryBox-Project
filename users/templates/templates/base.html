@@ -28,6 +28,9 @@
             {% if user.is_staff %}
                 <a class="nav-link" href="{% url 'create' %}">Crear Producto</a>
             {% endif %}
+            {% if not user.is_staff %}
+            <a class="nav-link" href="{% url 'cart:cart' %}">Ver carrito</a>
+            {% endif %}
             {% endif %}
             </li>
 
