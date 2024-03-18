@@ -1,17 +1,17 @@
 # CountryBox
 
-## Content this file
+## Contentenido
 
 1. [General Info](#Información-General)
 2. [Requirements](#requisitos)
 3. [Installation](#Instalación)
 
-## Información-General
+## 📓 Información-General
 
 Desarrollo de la primera parte del proyecto de la materia de Topicos Especiales de Ingenieria de Software de la
 universidad EAFIT 2024-1
 
-## Requisitos
+## 🚀 Requisitos
 
 Son necesarias los siguientes programas y librerias para la ejecucion de este proyecto:
 
@@ -23,7 +23,7 @@ Son necesarias los siguientes programas y librerias para la ejecucion de este pr
 
 - [Visual Studio Code](https://code.visualstudio.com/)
 
-## Instalación
+## 🔧 Instalación
 
 1. Abre la terminal y ejecuta el siguiente comando para clonar el repositorio:
 
