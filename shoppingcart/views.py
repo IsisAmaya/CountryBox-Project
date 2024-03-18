@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .utils import ShoppingCart
-from .forms import DeliveryAddressForm
-from .models import Cart, CartItem ,Order
+from .models import Cart, CartItem ,Order, OrderItem
 from products.models import Product
 from users.models import CustomUser
 from django.http import HttpRequest, HttpResponse
@@ -16,7 +15,10 @@ def cart(request):
     cart_items = CartItem.objects.filter(cart=cart.pk)
     cart_item = ShoppingCart(request)
     total_cart = cart_item.get_total(cart.pk)
-    return render(request, 'cart.html', {'cart': cart, 'cart_items': cart_items,'customer': customer, 'total': total_cart})
+    box_size = request.session.get('box_size', None)
+    if box_size is not None:
+        request.session['box_size'] = box_size
+    return render(request, 'cart.html', {'cart': cart, 'cart_items': cart_items,'customer': customer, 'total': total_cart, 'box_size': box_size})
 
 @login_required
 def add_to_cart(request, product_id):
@@ -39,40 +41,43 @@ def remove_from_cart(request, product_id):
     messages.success(request, f'Producto "{product.name}" eliminado del carrito')
     return redirect('cart:cart')
 
+
 @login_required
 def order(request):
-    cart, created = Cart.objects.get_or_create(customer=request.user)
-    cart_items = CartItem.objects.filter(cart=cart)
-    total_price = sum(item.get_total_price() for item in cart_items)
+    customer_id = request.user.id
+    customer = CustomUser.objects.get(pk=customer_id)
+    cart, create = Cart.objects.get_or_create(customer=customer)
+    cart_items = CartItem.objects.filter(cart=cart.pk)
+    total_cart = sum(item.get_total_price() for item in cart_items)
 
-    if request.method == 'POST':
-        delivery_address_form = DeliveryAddressForm(request.POST)
-        if delivery_address_form.is_valid():
-            delivery_address = delivery_address_form.save(commit=False)
-            delivery_address.customer = request.user
-            delivery_address.save()
+    if request.method == "POST":
+        address = request.POST["address"]
+        order = Order.objects.create(
+            cart=cart,
+            customer=customer,
+            address=address,
+            total_price=total_cart,
+        )
 
-            # calculate the final price including delivery fee
-            delivery_fee = 5.00  # assume a fixed delivery fee
-            final_price = total_price + delivery_fee
-
-            # create an order object with the cart, delivery address, and final price
-            order = Order.objects.create(
-                cart=cart,
-                customer=request.user,
-                delivery_address=delivery_address,
-                total_price=final_price
+        for item in cart_items:
+            OrderItem.objects.create(
+                order=order,
+                product=item.product,
+                quantity=item.quantity,
+                price=item.product.price,
             )
 
-            # clear the cart after creating an order
-            cart.clear()
+        # Clear the cart after creating an order
+        cart.items.clear()
 
-            # display a message 'order was realized'
-            messages.success(request, 'Order was realized!')
+        messages.success(request, "Your order has been created!")
+        return redirect("cart:order_confirmation")
+    
+     # Get cart items after clearing the cart
+    cart_items = CartItem.objects.filter(cart=cart.pk)
 
-    return render(request, 'order.html', {
-        'cart': cart,
-        'cart_items': cart_items,
-        'delivery_address': delivery_address,
-        'total_price': total_price
-    })
+    return render(request, "order.html", {"cart": cart, "cart_items": cart_items, 'customer': customer, "total_price": total_cart})
+
+@login_required
+def order_confirmation(request):
+    return render(request, "order_confirmation.html")

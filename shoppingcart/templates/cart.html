@@ -10,6 +10,7 @@
                     <p>Name: {{ customer.username }}</p>
                     <p>Email: {{ customer.email }}</p>
                     <p>Phone: {{ customer.phone_number }}</p>
+                    <p>Address: {{ customer.address }}</p>
                 </div>
                 <table class="table">
                     <thead>
@@ -27,20 +28,21 @@
                                 <td>{{ item.product.name }}</td>
                                 <td>{{ item.quantity }}</td>
                                 <td>{{ item.product.price }}</td>
+                                <td>{{ item.get_total_price }}</td>
                                 <td><a href="{% url 'cart:remove_from_cart' item.product.id %}">Remove</a></td>
                             </tr>
                         {% endfor %}
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="3"></td>
-                            <td>Total:</td>
-                            <td>{{ total }}</td>
-                        </tr>
-                    </tfoot>
                 </table>
+                
+                <label for="box_size">Select Box Size:</label>
+                    <select id="box_size" name="box_size">
+                        <option value="5">Small Box (5 products)</option>
+                        <option value="10">Medium Box (10 products)</option>
+                        <option value="20">Large Box (20 products)</option>
+                    </select>
 
-                {% comment %} <a href="{% url 'order' %}" class="btn btn-primary">Checkout</a> {% endcomment %}
+                <a href="{% url 'cart:order' %}" class="btn btn-primary">Checkout</a>
             {% endif %}
         {% endif %}
     {% endif %}

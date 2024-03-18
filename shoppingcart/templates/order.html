@@ -7,6 +7,17 @@
     {% endfor %}
   {% endif %}
   <h1>Order Details</h1>
+  <p>Selected Box Size: {% if box_size %} 
+    {% if box_size == '5' %}
+        Small Box (5 products)
+    {% elif box_size == '10' %}
+        Medium Box (10 products)
+    {% elif box_size == '20' %}
+        Large Box (20 products)
+    {% endif %}
+    {% else %}
+    No box size selected
+  {% endif %}</p>
   <table class="table">
     <thead>
       <tr>
@@ -18,14 +29,27 @@
     <tbody>
       {% for item in cart_items %}
         <tr>
-          <td>{{ item.product }}</td>
+          <td>{{ item.product.name }}</td>
           <td>{{ item.quantity }}</td>
           <td>${{ item.get_total_price }}</td>
         </tr>
       {% endfor %}
+      <tr>
+        <td><b>Total Price</b></td>
+        <td></td>
+        <td><b>${{ total_price }}</b></td>
+      </tr>
     </tbody>
   </table>
-  <p>Delivery Address: {{ delivery_address }}</p>
-  <p>Total Price: ${{ total_price }}</p>
-  <p><a href="{% url 'home' %}">Back to Home</a></p>
+  <h3>Delivery Information:</h3>
+  <p>Name: {{ customer.username }}</p>
+  <p>Delivey Address: {{ customer.address }}</p>
+  <p>Total to pay: ${{ total_price }}</p>
+  <form action="{% url 'cart:order_confirmation' %}" method="post" style="display: inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">Confirm Orden</button>
+  </form>
+  <a href="{% url 'cart:cart' %}" class="btn btn-danger">Cancel the order</a>
+  <p><a href="{% url 'list' %}">Add more products</a></p>
+
 {% endblock %}
