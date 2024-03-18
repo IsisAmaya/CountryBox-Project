@@ -6,24 +6,24 @@
       <div class="alert alert-{{ message.tags }}">{{ message }}</div>
     {% endfor %}
   {% endif %}
-  <h1>Order Details</h1>
+  <h1>Detalles de la orden</h1>
   <p>Selected Box Size: {% if box_size %} 
     {% if box_size == '5' %}
-        Small Box (5 products)
+        Caja pequeña (5 productos)
     {% elif box_size == '10' %}
-        Medium Box (10 products)
+        Caja mediana (10 productos)
     {% elif box_size == '20' %}
-        Large Box (20 products)
+        Caja grande (20 productos)
     {% endif %}
     {% else %}
-    No box size selected
+    No se ha seleccionado un tamaño de caja
   {% endif %}</p>
   <table class="table">
     <thead>
       <tr>
-        <th>Product</th>
-        <th>Quantity</th>
-        <th>Price</th>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
       </tr>
     </thead>
     <tbody>
@@ -35,21 +35,21 @@
         </tr>
       {% endfor %}
       <tr>
-        <td><b>Total Price</b></td>
+        <td><b>Precio total</b></td>
         <td></td>
         <td><b>${{ total_price }}</b></td>
       </tr>
     </tbody>
   </table>
-  <h3>Delivery Information:</h3>
-  <p>Name: {{ customer.username }}</p>
-  <p>Delivey Address: {{ customer.address }}</p>
-  <p>Total to pay: ${{ total_price }}</p>
+  <h3>Información de entrega:</h3>
+  <p>Nombre: {{ customer.username }}</p>
+  <p>Dirección de entrega: {{ customer.address }}</p>
+  <p>Total a pagar: ${{ total_price }}</p>
   <form action="{% url 'cart:order_confirmation' %}" method="post" style="display: inline;">
     {% csrf_token %}
-    <button type="submit" class="btn btn-success">Confirm Orden</button>
+    <button type="submit" class="btn btn-success">Confirmar Orden</button>
   </form>
-  <a href="{% url 'cart:cart' %}" class="btn btn-danger">Cancel the order</a>
-  <p><a href="{% url 'list' %}">Add more products</a></p>
+  <a href="{% url 'cart:cart' %}" class="btn btn-danger">Cancelar Orden</a>
+  <p><a href="{% url 'list' %}">Seguir comprando</a></p>
 
 {% endblock %}
