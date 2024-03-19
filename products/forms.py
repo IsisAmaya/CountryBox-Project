@@ -1,7 +1,9 @@
 from django import forms
 from .models import Product
 
+
 class ProductForm(forms.ModelForm):
+    
     COUNTRYS_CHOICES = [
         ("Japon","Japon"),
         ("Brasil","Brasil"),
@@ -32,19 +34,3 @@ class ProductForm(forms.ModelForm):
             'image_product',
             'price',
         ]
-
-# In your Django form definition (forms.py)
-
-
-
-class YourProductForm(forms.Form):  # or forms.ModelForm if you have a model
-    # your fields definitions here
-    # ...
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            if isinstance(field.widget, forms.CheckboxInput):
-                field.widget.attrs.update({'class': 'form-check-input'})
-            else:
-                field.widget.attrs.update({'class': 'form-control'})
