@@ -7,56 +7,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{% static 'css/headers.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
 <body>
-    <div class="container">
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-          <div class="col-md-3 mb-2 mb-md-0">
-            <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-              <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#"/></svg>
+    <nav class="navbar navbar-expand-lg navbar-light bg-navbar-custom sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'images/logo.png' %}" alt="Logo" style="height: 40px;">
             </a>
-          </div>
-    
-          <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a class="nav-link" href="{% url 'home' %}">Home</a></li>
-            <li><a class="nav-link" href="{% url 'list' %}">Ver productos</a></li>
-            <li>
-            {% if  user.is_authenticated %}
-            {% if user.is_staff %}
-                <a class="nav-link" href="{% url 'create' %}">Crear Producto</a>
-            {% endif %}
-            {% if not user.is_staff %}
-            <a class="nav-link" href="{% url 'cart:cart' %}">Ver carrito</a>
-            {% endif %}
-            {% endif %}
-            </li>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarContent">
+                <div class="navbar-nav">
+                    <a href="{% url 'list' %}" class="nav-link">Ver productos</a>
+                </div>
+                <form class="d-flex flex-grow-1 mx-4">
+                    <input class="form-control me-2 search-input" type="search" placeholder="Buscar productos, marcas y más..." aria-label="Search">
+                    <button class="btn btn-search" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.397h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.087 1.087 0 0 0-.115-.098z"/>
+                            <path d="M6.5 0a6.5 6.5 0 1 1 0 13 6.5 6.5 0 0 1 0-13z"/>
+                        </svg>
+                    </button>
+                </form>
+                <div class="navbar-nav">
+                    <a href="/user/login/" class="nav-link">Ingresa</a>
+                    <a href="{% url 'singup' %}" class="nav-link btn-signup">Crea tu cuenta</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-          </ul>
-    
-          <div class="col-md-3 text-end">
-            {% if not user.is_authenticated %}
-            <a href="/user/login/"><button type="button" class="btn btn-outline-primary me-2">Ingresar</button></a>
-            {% else %}
-            <a href="{% url 'logout' %}"><button type="button" class="btn btn-outline-primary me-2">Salir</button></a>
-            {% endif %}
-            {% if not user.is_authenticated %}
-            <a href="{% url 'singup' %}"><button type="button" class="btn btn-primary">Registrarse</button></a>
-            {% endif %}
-          </div>
-        </header>
-      </div>
-
-    <div class="container">
+    <div class="container mt-4">
         {% block content %}
+        <!-- El contenido dinámico irá aquí -->
         {% endblock %}
-    </div>
-    
+    </div>  
+
+    <footer class="footer mt-auto py-3">
+        <div class="container">
+            <span class="text-muted">Pon tu contenido de footer aquí.</span>
+        </div>
+    </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+
+    <!--<style>
+        /* Colores y estilos directos para la barra de navegación */
+        .bg-navbar-custom {
+            background-color: #ffd700; /* color amarillo para la barra de navegación */
+        }
+        .navbar-light .navbar-nav .nav-link {
+            color: #333; /* color oscuro para los enlaces */
+        }
+        .navbar-light .navbar-nav .btn-signup {
+            background-color: #555; /* color oscuro para el botón de registro */
+            color: white;
+        }
+        .search-input {
+            flex-grow: 1;
+            margin-right: -48px; /* ajuste para alinear el ícono de búsqueda */
+        }
+        .btn-search {
+            background-color: transparent;
+            border: none;
+            color: #333;
+            position: relative;
+            right: 50px; /* ajuste para superponer el botón sobre la barra de búsqueda */
+            z-index: 1000;
+        }
+        .footer {
+            background-color: #f5f5f5; /* color claro para el pie de página */
+        }
+        /* Aquí puedes agregar más estilos personalizados que necesites */
+    </style>-->
