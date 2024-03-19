@@ -7,8 +7,8 @@ from users import views
 from users.utils import is_staff
 from django.db.models import Q
 
-
 # Create your views here.
+
 
 @user_passes_test(is_staff, login_url="/product/denied/")
 def ProductCreateView(request):
@@ -21,6 +21,7 @@ def ProductCreateView(request):
     else:
         return render(request, 'products/create.html', { 'form': ProductForm})
 
+
 def ProductListView(request):
     orden = request.GET.get('orden')
 
@@ -31,6 +32,7 @@ def ProductListView(request):
     else:
         products = Product.objects.all()
     return render(request, "products/list.html", {"products": products})
+
 
 def ProductDetailsView(request, id):
     if Product.objects.filter(id=int(id)).exists():
@@ -46,6 +48,7 @@ def ProductDetailsView(request, id):
         return redirect('home')
         
     return render(request, 'products/details.html', { 'product': product })
+
 
 def ProductDelete(request, id):
     if Product.objects.filter(id=int(id)).exists():
@@ -66,7 +69,9 @@ def ProductDelete(request, id):
         
     return redirect('list')
 
+
 #------------Other Functions--------------------
+
 
 def access_denied(request):
     return HttpResponseForbidden("No tienes permiso para acceder a esta página.")
@@ -80,5 +85,4 @@ def search(request):
         Q(country__icontains=query)
     )
     return render(request, 'products/searchresults.html', {'products': products})
-
-    
+  

@@ -1,6 +1,5 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-#from django.contrib.auth.models import User
 from users.models import CustomUser #Nuestro modelo
 
 
@@ -31,4 +30,3 @@ class UserSingupForm(UserCreationForm):
         fields = ['username','email', 'phone_number','address' ,'password1', 'password2','is_staff']
         help_texts={k:"" for k in fields}
    
-

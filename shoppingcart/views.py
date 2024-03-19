@@ -4,8 +4,9 @@ from .utils import ShoppingCart
 from .models import Cart, CartItem ,Order, OrderItem
 from products.models import Product
 from users.models import CustomUser
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+
 
 @login_required
 def cart(request):
@@ -16,6 +17,7 @@ def cart(request):
     cart_item = ShoppingCart(request)
     total_cart = cart_item.get_total(cart.pk)
     return render(request, 'cart.html', {'cart': cart, 'cart_items': cart_items,'customer': customer, 'total': total_cart})
+
 
 @login_required
 def add_to_cart(request, product_id):
@@ -28,6 +30,7 @@ def add_to_cart(request, product_id):
         return redirect('cart:cart')
     else:
         return HttpResponse("El producto no existe en la base de datos.")
+
 
 @login_required
 def remove_from_cart(request, product_id):
@@ -71,6 +74,7 @@ def order(request):
     
     
     return render(request, "order.html", {"cart": cart, "cart_items": cart_items, 'customer': customer, "total_price": total_cart, 'total_quantity': total_quantity})
+
 
 @login_required
 def order_confirmation(request):

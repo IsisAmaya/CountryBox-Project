@@ -2,13 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.decorators import user_passes_test
-from django.views import View
 from django.contrib import messages
 from .forms import UserSingupForm
 from shoppingcart.models import Cart
 from products.models import Product
-from .utils import is_staff
 import random as rd
 
 
@@ -29,6 +26,7 @@ def home_view(request):
         'obj_3' : instancias[2],
     }
     return render(request, 'templates/home.html', context)
+
 
 def signup_view(request):
     if request.method == 'POST':
@@ -62,13 +60,7 @@ def login_view(request):
         return render(request, 'userTemplates/loginUser.html', {'form': AuthenticationForm(), 'is_login_page': True})
 
 
-
 @login_required
 def logout_view(request):
     logout(request)
     return redirect('home')
-    
-    #logout(request)
-    #return render(request, 'customerTemplates/logoutUser.html')
-
-

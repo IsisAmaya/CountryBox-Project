@@ -1,8 +1,5 @@
 from django.urls import path
 from . import views
-#app_name = 'products'
-
-#from shoppingcart.views import add_to_cart
 
 urlpatterns = [
     path('create/', views.ProductCreateView, name='create'),
@@ -11,5 +8,5 @@ urlpatterns = [
     path('details/<int:id>/', views.ProductDetailsView, name='details'),
     path('delete/<int:id>/', views.ProductDelete, name='delete'),
     path('search/', views.search, name='search'),
-    #path('add_to_cart/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
+
 ]
