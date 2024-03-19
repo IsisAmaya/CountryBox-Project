@@ -40,7 +40,12 @@ class ShoppingCart:
     def get_cart_quantity(self):
         cart = self.get_cart()
         return sum(item['quantity'] for item in cart.values())
-
+    
+    def get_total_quantity(cart_items):
+        total_quantity = 0
+        for item in cart_items:
+            total_quantity += item.quantity
+        return total_quantity
 
     def get_cart_id(self):
         return self.session.session_key

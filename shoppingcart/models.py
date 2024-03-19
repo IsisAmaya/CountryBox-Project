@@ -18,6 +18,7 @@ class CartItem(models.Model):
 
     def get_total_price(self):
         return self.product.price * self.quantity
+
     
     @classmethod
     def all(cls):
@@ -32,6 +33,12 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order {self.pk}"
+    
+    def get_total_quantity(self):
+        total_quantity = 0
+        for item in self:
+            total_quantity += item.quantity
+        return total_quantity
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="items")

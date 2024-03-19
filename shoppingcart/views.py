@@ -15,10 +15,7 @@ def cart(request):
     cart_items = CartItem.objects.filter(cart=cart.pk)
     cart_item = ShoppingCart(request)
     total_cart = cart_item.get_total(cart.pk)
-    box_size = request.session.get('box_size', None)
-    if box_size is not None:
-        request.session['box_size'] = box_size
-    return render(request, 'cart.html', {'cart': cart, 'cart_items': cart_items,'customer': customer, 'total': total_cart, 'box_size': box_size})
+    return render(request, 'cart.html', {'cart': cart, 'cart_items': cart_items,'customer': customer, 'total': total_cart})
 
 @login_required
 def add_to_cart(request, product_id):
@@ -49,6 +46,8 @@ def order(request):
     cart, create = Cart.objects.get_or_create(customer=customer)
     cart_items = CartItem.objects.filter(cart=cart.pk)
     total_cart = sum(item.get_total_price() for item in cart_items)
+    total_quantity = ShoppingCart.get_total_quantity(cart.items.all())
+    
 
     if request.method == "POST":
         address = request.POST["address"]
@@ -71,7 +70,7 @@ def order(request):
         return redirect("cart:order_confirmation")
     
     
-    return render(request, "order.html", {"cart": cart, "cart_items": cart_items, 'customer': customer, "total_price": total_cart})
+    return render(request, "order.html", {"cart": cart, "cart_items": cart_items, 'customer': customer, "total_price": total_cart, 'total_quantity': total_quantity})
 
 @login_required
 def order_confirmation(request):

@@ -24,23 +24,24 @@
         </tr>
       {% endfor %}
       <tr>
-        <td><b>Precio total</b></td>
-        <td></td>
+        <td><b>Total</b></td>
+        <td>{{ total_quantity }}</td>
         <td><b>${{ total_price }}</b></td>
       </tr>
     </tbody>
   </table>
   <h3>Información de entrega:</h3>
   <p>Nombre: {{ customer.username }}</p>
-
-  <p>Tamaño de la caja: <span id="selected_box"></span></p>
-
-    <script>
-        var selected_box = localStorage.getItem("selected_box");
-        document.getElementById("selected_box").textContent = selected_box;
-    </script>
-
   <p>Dirección de entrega: {{ customer.address }}</p>
+
+  <h5>Tamaño de caja:</h5>
+  {% if total_quantity <= 10 %}
+    <p>Caja pequeña: máximo 10 productos</p>
+  {% elif total_quantity <= 20 %}
+    <p>Caja mediana: máximo 20 productos</p>
+  {% elif total_quantity <= 30 %}
+    <p>Caja grande: máximo 30 productos</p>
+  {% endif %}
 
   <p>Total a pagar: ${{ total_price }}</p>
   <form action="{% url 'cart:order_confirmation' %}" method="post" style="display: inline;">
