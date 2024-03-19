@@ -13,7 +13,7 @@ import random as rd
 
 
 def home_view(request):
-    ids = list(Product.objects.values_list('id', flat=True))
+    '''ids = list(Product.objects.values_list('id', flat=True))
     print(f"Ids: {ids}")
     
     if len(ids) >= 3:
@@ -27,8 +27,8 @@ def home_view(request):
         'obj_1' : instancias[0],
         'obj_2' : instancias[1],
         'obj_3' : instancias[2],
-    }
-    return render(request, 'templates/home.html', context)
+    }'''
+    return render(request, 'templates/home.html')
 
 def signup_view(request):
     if request.method == 'POST':
