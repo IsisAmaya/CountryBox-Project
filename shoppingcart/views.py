@@ -66,18 +66,16 @@ def order(request):
                 quantity=item.quantity,
                 price=item.product.price,
             )
-
-        # Clear the cart after creating an order
-        cart.items.clear()
-
+        
         messages.success(request, "Your order has been created!")
         return redirect("cart:order_confirmation")
     
-     # Get cart items after clearing the cart
-    cart_items = CartItem.objects.filter(cart=cart.pk)
-
+    
     return render(request, "order.html", {"cart": cart, "cart_items": cart_items, 'customer': customer, "total_price": total_cart})
 
 @login_required
 def order_confirmation(request):
+    cart = Cart.objects.get(customer=request.user)
+    cart.items.all().delete()
+
     return render(request, "order_confirmation.html")

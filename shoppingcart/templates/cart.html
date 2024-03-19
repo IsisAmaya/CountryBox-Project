@@ -1,24 +1,23 @@
 {% extends "templates/base.html" %}
 
 {% block content %}
-    <h2>Shopping Cart</h2>
+    <h2>Carrito de compras</h2>
     {% if user.is_authenticated %}
         {% if not user.is_staff %}    
             {% if cart_items %}
                 <div class="customer-info box">
-                    <h3>Customer Information:</h3>
-                    <p>Name: {{ customer.username }}</p>
-                    <p>Email: {{ customer.email }}</p>
-                    <p>Phone: {{ customer.phone_number }}</p>
-                    <p>Address: {{ customer.address }}</p>
+                    <h3>Información del usuario:</h3>
+                    <p>Nombre: {{ customer.username }}</p>
+                    <p>Correo: {{ customer.email }}</p>
+                    <p>Celular: {{ customer.phone_number }}</p>
                 </div>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Product</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                            <th>Total Price</th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio por unidad</th>
+                            <th>Precio por cantidad</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -35,14 +34,14 @@
                     </tbody>
                 </table>
                 
-                <label for="box_size">Select Box Size:</label>
+                <label for="box_size">Seleccione el tamaño de su caja:</label>
                     <select id="box_size" name="box_size">
-                        <option value="5">Small Box (5 products)</option>
-                        <option value="10">Medium Box (10 products)</option>
-                        <option value="20">Large Box (20 products)</option>
+                        <option value="5">Caja pequeña (5 productos)</option>
+                        <option value="10">Caja mediana (10 productos)</option>
+                        <option value="20">Caja grande (20 productos)</option>
                     </select>
 
-                <a href="{% url 'cart:order' %}" class="btn btn-primary">Checkout</a>
+                <a href="{% url 'cart:order' %}" class="btn btn-primary">Verificar</a>
             {% endif %}
         {% endif %}
     {% endif %}
