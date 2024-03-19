@@ -1,0 +1,25 @@
+{% extends "templates/base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Resultados de la búsqueda</h2>
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="{{ product.image_product.url }}" class="card-img-top" alt="{{ product.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.description }}</p>
+                    <p class="card-text">{{ product.country }}</p>
+                    <p class="card-text">{{ product.price }}</p>
+                    <a href="{% url 'details' product.id %}" class="btn btn-primary">Detalles</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No se encontraron productos con esos criterios de búsqueda.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+

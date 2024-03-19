@@ -23,4 +23,126 @@
         }
         .footer {
             background-color: #f5f5f5; /* color claro para el pie de página */
+            position: absolute; /* Hace que el footer quede fijo en la parte inferior */
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
         }
+        
+        /* Asegúrate de que el body actúe como un contenedor flex */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Altura de viewport completa */
+            margin: 0;
+            }
+
+
+        .main-content {
+            flex: 1; /* Esto asegura que el contenido tome el espacio necesario y empuje el footer hacia abajo */
+            padding-top: 70px; /* Ajusta este valor según la altura de tu navbar */
+        }
+
+        .footer {
+            position: relative; /* No necesitas 'absolute' si estás usando flex en el body */
+            width: 100%; /* Un ancho completo */
+            text-align: center; /* Alineación del texto */
+
+            }
+
+    
+          .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f8f9fa;
+        }
+        
+        .login-form {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .login-form .form-label {
+            font-weight: 600;
+            color: #333333;
+        }
+        
+        .login-form input[type="text"],
+        .login-form input[type="password"] {
+            border: 1px solid #cccccc;
+            padding: 0.5rem 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.25rem;
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background-color: #ffdd00;
+            border-color: #ffdd00;
+            color: #333333;
+        }
+        
+        .btn-outline-secondary {
+            border-color: #cccccc;
+            color: #333333;
+        }
+        
+        .btn-block {
+            padding: 0.5rem 1rem;
+        }
+        
+        .notification {
+            margin-top: 1rem;
+            color: #e74c3c;
+            text-align: center;
+        }
+
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f8f9fa;
+        }
+        
+        .login-form {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 0.25rem;
+        }
+        
+        .btn-primary {
+            background-color: #ffdd00;
+            border-color: #ffdd00;
+            color: #333;
+            margin-top: 1rem;
+        }
+        
+        .alert {
+            margin-top: 1rem;
+        }
+        
+        

@@ -5,6 +5,8 @@ from .models import Product
 from .forms import ProductForm
 from users import views
 from users.utils import is_staff
+from django.db.models import Q
+
 
 # Create your views here.
 
@@ -68,5 +70,15 @@ def ProductDelete(request, id):
 
 def access_denied(request):
     return HttpResponseForbidden("No tienes permiso para acceder a esta página.")
-    
+
+# views.py en la aplicación products
+def search(request):
+    query = request.GET.get('q', '')
+    products = Product.objects.filter(
+        Q(name__icontains=query) |
+        Q(description__icontains=query) |
+        Q(country__icontains=query)
+    )
+    return render(request, 'products/searchresults.html', {'products': products})
+
     

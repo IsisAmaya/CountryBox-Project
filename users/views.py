@@ -50,15 +50,17 @@ def signup_view(request):
 
 
 def login_view(request):
-    if request.method == 'GET':
-        return render(request, 'userTemplates/loginUser.html',{'form':AuthenticationForm})
-    else:
+    if request.method == 'POST':
         user = authenticate(request, username=request.POST['username'],password=request.POST['password'])
-    if user is None:
-        return render(request,'userTemplates/loginUser.html',{'form': AuthenticationForm(),'error': 'username and password do not match'})
+        if user is None:
+            return render(request, 'userTemplates/loginUser.html', {'form': AuthenticationForm(), 'error': 'Username and password do not match', 'is_login_page': True})
+        else:
+            login(request, user)
+            return redirect('home')
     else:
-        login(request, user)
-    return redirect('home')
+        # Aquí también pasamos 'is_login_page': True para que se muestre la página de login adecuadamente
+        return render(request, 'userTemplates/loginUser.html', {'form': AuthenticationForm(), 'is_login_page': True})
+
 
 
 @login_required

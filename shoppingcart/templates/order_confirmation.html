@@ -1,7 +1,27 @@
 {% extends "templates/base.html" %}
 
 {% block content %}
-<h1>Confirmación de orden</h1>
-<p>Gracias por su compra!</p>
-<p><a href="{% url 'home' %}">Volver al inicio</a></p>
+<div class="container mt-5">
+    <div class="py-5 text-center">
+        <h2 class="display-4">Confirmación de Orden</h2>
+        <p class="lead">Gracias por su compra!</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-5">
+            <div class="alert alert-success" role="alert">
+                Su orden ha sido procesada con éxito.
+            </div>
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Detalles de la Orden</h5>
+                    <p class="card-text">Volver al inicio para continuar comprando.</p>
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'home' %}" class="btn btn-outline-primary">Volver al Inicio</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
