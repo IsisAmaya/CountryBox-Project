@@ -51,7 +51,7 @@ def order(request):
     total_cart = sum(item.get_total_price() for item in cart_items)
 
     if request.method == "POST":
-        address = customer.address  # Obtener la dirección del usuario
+        address = request.POST["address"]
         order = Order.objects.create(
             cart=cart,
             customer=customer,
@@ -66,14 +66,16 @@ def order(request):
                 quantity=item.quantity,
                 price=item.product.price,
             )
-
+        
         messages.success(request, "Your order has been created!")
         return redirect("cart:order_confirmation")
     
-    cart_items.delete()
     
     return render(request, "order.html", {"cart": cart, "cart_items": cart_items, 'customer': customer, "total_price": total_cart})
 
 @login_required
 def order_confirmation(request):
+    cart = Cart.objects.get(customer=request.user)
+    cart.items.all().delete()
+
     return render(request, "order_confirmation.html")

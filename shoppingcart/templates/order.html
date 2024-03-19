@@ -7,17 +7,6 @@
     {% endfor %}
   {% endif %}
   <h1>Detalles de la orden</h1>
-  <p>Tamaño de caja seleccionado: {% if box_size %} 
-    {% if box_size == '5' %}
-        Caja pequeña (5 productos)
-    {% elif box_size == '10' %}
-        Caja mediana (10 productos)
-    {% elif box_size == '20' %}
-        Caja grande (20 productos)
-    {% endif %}
-    {% else %}
-    No se ha seleccionado un tamaño de caja
-  {% endif %}</p>
   <table class="table">
     <thead>
       <tr>
@@ -44,6 +33,17 @@
   <h3>Información de entrega:</h3>
   <p>Nombre: {{ customer.username }}</p>
   <p>Dirección de entrega: {{ customer.address }}</p>
+  <p>Tamaño de caja seleccionado: {% if box_size %} 
+    {% if box_size == '5' %}
+        Caja pequeña (5 productos)
+    {% elif box_size == '10' %}
+        Caja mediana (10 productos)
+    {% elif box_size == '20' %}
+        Caja grande (20 productos)
+    {% endif %}
+    {% else %}
+    No se ha seleccionado un tamaño de caja
+  {% endif %}</p>
   <p>Total a pagar: ${{ total_price }}</p>
   <form action="{% url 'cart:order_confirmation' %}" method="post" style="display: inline;">
     {% csrf_token %}
