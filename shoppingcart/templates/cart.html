@@ -33,15 +33,30 @@
                         {% endfor %}
                     </tbody>
                 </table>
-                
-                <label for="box_size">Seleccione el tamaño de su caja:</label>
-                    <select id="box_size" name="box_size">
-                        <option value="5">Caja pequeña (5 productos)</option>
-                        <option value="10">Caja mediana (10 productos)</option>
-                        <option value="20">Caja grande (20 productos)</option>
-                    </select>
 
-                <a href="{% url 'cart:order' %}" class="btn btn-primary">Verificar</a>
+                <form id="box_size_form">
+                    <label for="box_size">Seleccione el tamaño de su caja:</label>
+                    <select id="box_size" name="box_size">
+                        <option value="Caja pequeña (5 productos)">Caja pequeña (5 productos)</option>
+                        <option value="Caja mediana (10 productos)">Caja mediana (10 productos)</option>
+                        <option value="Caja grande (20 productos)">Caja grande (20 productos)</option>
+                    </select>
+                <div class="form-group">
+                    <a href="{% url 'cart:order' %}"  onclick="guardarOpcion()" class="btn btn-primary">Verificar</a>
+                </div>
+                
+                </form>
+            
+                <script>
+                    function guardarOpcion() {
+                        var selected_box = document.getElementById("box_size").value;
+                        localStorage.setItem("selected_box", selected_box);
+                        window.location.href = "/shopping-cart/order/";
+                    }
+                </script>
+
+                
+                </form>
             {% endif %}
         {% endif %}
     {% endif %}
