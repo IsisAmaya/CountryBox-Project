@@ -21,6 +21,10 @@ Son necesarias los siguientes programas y librerias para la ejecucion de este pr
 
 `python -m pip install django`
 
+* [Pillow](https://pypi.org/project/Pillow/): En la consola del sistema ejecuta el siguiente comando:
+
+`python -m pip install Pillow`
+
 - [Visual Studio Code](https://code.visualstudio.com/)
 
 ## 🔧 Instalación
