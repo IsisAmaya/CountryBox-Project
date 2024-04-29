@@ -1,15 +1,17 @@
 {% extends "templates/base.html" %}
 {% block content %}
 {% load static %}
+{% load i18n %}
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home</title>
+    <title> {% trans " Home " %} </title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
 <body>
+
     <!-- Bootstrap Carousel (Slider) -->
     <div id="homeCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
@@ -46,7 +48,7 @@
     </div>  
 
     <div class="container px-4 py-5" id="hanging-icons">
-      <h2 class="pb-2 border-bottom">Nuestros recomendados</h2>
+      <h2 class="pb-2 border-bottom"> {% trans " Our recommended " %}</h2>
       <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
         <!-- Aquí comienza la tarjeta de recomendados -->
         <div class="col d-flex align-items-start">
@@ -56,7 +58,7 @@
             <img src="{{ obj_1.image_product.url }}" class="img-thumbnail" alt="Producto 1">
             </a>
             <a href="{% url 'details' id=obj_1.id %}" class="btn btn-primary mt-3">
-              Detalles
+              {% trans " Details " %}
             </a>
           </div>
         </div>
@@ -67,7 +69,7 @@
             <img src="{{ obj_2.image_product.url }}" class="img-thumbnail" alt="Producto 2">
             </a>
             <a href="{% url 'details' id=obj_2.id %}" class="btn btn-primary">
-              Detalles
+              {% trans " Details " %}
             </a>
           </div>
         </div>
@@ -78,7 +80,7 @@
             <img src="{{ obj_3.image_product.url }}" class="img-thumbnail" alt="Producto 3">
             </a>
             <a href="{% url 'details' id=obj_3.id %}" class="btn btn-primary">
-              Detalles
+              {% trans " Details " %}
             </a>
           </div>
         </div>

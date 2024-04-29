@@ -39,7 +39,6 @@ class ShoppingCart:
         total = 0
         cart = Cart.objects.get(pk=cart_id)
         query = CartItem.objects.filter(cart=cart)
-        print(query)
 
     
     def get_total_quantity(cart_items):

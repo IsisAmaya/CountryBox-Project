@@ -3,15 +3,15 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
-from .forms import UserSingupForm
+from .forms import UserSingupForm, UserStaffForm
 from shoppingcart.models import Cart
 from products.models import Product
+from .models import CustomUser
 import random as rd
 
 
 def home_view(request):
     ids = list(Product.objects.values_list('id', flat=True))
-    print(f"Ids: {ids}")
     
     if len(ids) >= 3:
         random_ids = rd.sample(ids, 3)
@@ -59,6 +59,18 @@ def login_view(request):
         # Aquí también pasamos 'is_login_page': True para que se muestre la página de login adecuadamente
         return render(request, 'userTemplates/loginUser.html', {'form': AuthenticationForm(), 'is_login_page': True})
 
+def UserList(request):
+    if request.method == 'POST':
+        form = UserStaffForm(request.POST)
+        if form.is_valid():
+            user_id = request.POST.get('user_id')
+            is_staff = request.POST.get('is_staff') == 'on'  # 'on' si el checkbox está marcado
+            CustomUser.objects.filter(pk=user_id).update(is_staff=is_staff)
+            return redirect('list_users')  # Redirige a una URL de éxito
+    else:
+        users = CustomUser.objects.all()
+        form = UserStaffForm()
+    return render(request, 'userTemplates/listUser.html', {'form': form, 'users':users})
 
 @login_required
 def logout_view(request):

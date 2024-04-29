@@ -1,0 +1,30 @@
+{% extends "templates/base.html" %}
+{% load i18n %}
+{% block content %}
+<div class="container">
+    <h2 class="mb-3"> {% trans "List of Users" %} </h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for user in users %}
+        <div class="col">
+            <ul class="list-group mb-3">
+              <li class="list-group-item">
+                <form method="post" action="{% url 'list_users' %}">  <!-- Asegúrate de definir la URL de destino -->
+                  {% csrf_token %}
+                  <input type="hidden" name="user_id" value="{{ user.id }}">  <!-- Campo oculto para identificar al usuario -->
+                  <div>
+                    <b>{{ user.username }} </b>
+                      <br> <!-- Muestra el nombre de usuario -->
+                      <label>
+                        <input type="checkbox" name= {% trans "is_staff" %}  {% if user.is_staff %}checked{% endif %}>
+                        {% trans "Is Staff" %}
+                      </label>
+                  </div>
+                  <button type="submit" class="btn btn-light">{% trans "Update" %}</button>
+                </form>            
+              </li>
+            </ul>
+        </div>
+        {% endfor %}
+      </div>
+</div>
+{% endblock %}

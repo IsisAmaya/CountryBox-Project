@@ -25,7 +25,6 @@ def add_to_cart(request, product_id):
     cart = cart_item.get_cart(request)
     if Product.objects.filter(id=product_id).exists():
         quantity = int(request.POST.get('quantity', 1))
-        print(cart.pk)
         cart_item.add_product(cart.id, product_id, quantity)
         return redirect('cart:cart')
     else:

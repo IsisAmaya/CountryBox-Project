@@ -1,0 +1,375 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-28 01:09-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\products\forms.py:9
+msgid "Japan"
+msgstr "Japón"
+
+#: .\products\forms.py:10
+msgid "Brazil"
+msgstr "Brasil"
+
+#: .\products\forms.py:11
+msgid "Canada"
+msgstr "Canadá"
+
+#: .\products\forms.py:12
+msgid "Russia"
+msgstr "Rusia"
+
+#: .\products\forms.py:16
+msgid "Large"
+msgstr "Grande"
+
+#: .\products\forms.py:17
+msgid "Medium"
+msgstr "Mediano"
+
+#: .\products\forms.py:18
+msgid "Small"
+msgstr "Pequeño"
+
+#: .\products\forms.py:21
+msgid "Name"
+msgstr "Nombre"
+
+#: .\products\forms.py:22
+msgid "Description"
+msgstr "Descripción"
+
+#: .\products\forms.py:23
+msgid "Country"
+msgstr "Pais"
+
+#: .\products\forms.py:24
+msgid "Size"
+msgstr "Tamaño"
+
+#: .\products\forms.py:25
+msgid "Image of product"
+msgstr "Imagen del producto"
+
+#: .\products\forms.py:26 .\shoppingcart\templates\order.html:15
+msgid "Price"
+msgstr "Precio"
+
+#: .\products\templates\products\create.html:8
+#: .\products\templates\products\create.html:28
+#: .\users\templates\templates\base.html:48
+msgid " Create product "
+msgstr " Crear producto "
+
+#: .\products\templates\products\create.html:48
+msgid " Save "
+msgstr " Guardar "
+
+#: .\products\templates\products\details.html:18
+msgid "Description:"
+msgstr "Descripción:"
+
+#: .\products\templates\products\details.html:19
+msgid "Country of origin:"
+msgstr "País de origen:"
+
+#: .\products\templates\products\details.html:20
+msgid "Product size:"
+msgstr "Tamaño del producto:"
+
+#: .\products\templates\products\details.html:21
+#: .\products\templates\products\list.html:35
+msgid "Price:"
+msgstr "Precio:"
+
+#: .\products\templates\products\details.html:28
+msgid " Quantity: "
+msgstr " Cantidad: "
+
+#: .\products\templates\products\details.html:30
+msgid " Add to cart "
+msgstr " Añadir al carrito "
+
+#: .\products\templates\products\details.html:42
+#: .\shoppingcart\templates\cart.html:32
+msgid " Remove "
+msgstr " Eliminar "
+
+#: .\products\templates\products\list.html:8
+msgid " List "
+msgstr " Lista "
+
+#: .\products\templates\products\list.html:15
+msgid "Sort Descending"
+msgstr "Ordenar Descendente"
+
+#: .\products\templates\products\list.html:19
+msgid "Sort Ascending"
+msgstr "Ordenar Ascendente"
+
+#: .\products\templates\products\list.html:33
+msgid "Country:"
+msgstr "País:"
+
+#: .\products\templates\products\list.html:34
+msgid "Size:"
+msgstr "Tamaño:"
+
+#: .\products\templates\products\list.html:38
+#: .\products\templates\products\searchresults.html:16
+msgid "Details"
+msgstr "Detalles"
+
+#: .\products\templates\products\searchresults.html:5
+msgid "Search Results"
+msgstr "Resultados de Búsqueda"
+
+#: .\products\templates\products\searchresults.html:21
+msgid "No products were found that matched your search criteria."
+msgstr ""
+"No se encontraron productos que coincidan con los criterios de búsqueda."
+
+#: .\shoppingcart\templates\cart.html:5
+msgid "Shopping Cart"
+msgstr "Carrito de Compras"
+
+#: .\shoppingcart\templates\cart.html:10
+msgid "User Information:"
+msgstr "Información del Usuario:"
+
+#: .\shoppingcart\templates\cart.html:11
+#: .\shoppingcart\templates\order.html:34
+msgid "Name:"
+msgstr "Nombre:"
+
+#: .\shoppingcart\templates\cart.html:12
+msgid "Email:"
+msgstr "Correo electrónico:"
+
+#: .\shoppingcart\templates\cart.html:13
+msgid "Mobile:"
+msgstr "Telefono:"
+
+#: .\shoppingcart\templates\cart.html:18
+#: .\shoppingcart\templates\order.html:13
+msgid "Product"
+msgstr "Producto"
+
+#: .\shoppingcart\templates\cart.html:19
+#: .\shoppingcart\templates\order.html:14
+msgid "Quantity"
+msgstr "Cantidad"
+
+#: .\shoppingcart\templates\cart.html:20
+msgid "Unit Price"
+msgstr "Precio Unitario"
+
+#: .\shoppingcart\templates\cart.html:21
+msgid "Total Price"
+msgstr "Precio Total"
+
+#: .\shoppingcart\templates\cart.html:38
+msgid " Check "
+msgstr " Revisar "
+
+#: .\shoppingcart\templates\order.html:9
+#: .\shoppingcart\templates\order_confirmation.html:17
+msgid "Order Details"
+msgstr "Detalles del Pedido"
+
+#: .\shoppingcart\templates\order.html:27
+msgid "Total"
+msgstr "Total"
+
+#: .\shoppingcart\templates\order.html:33
+msgid "Delivery Information:"
+msgstr "Información de Entrega:"
+
+#: .\shoppingcart\templates\order.html:35
+msgid "Delivery Address:"
+msgstr "Dirección de Entrega:"
+
+#: .\shoppingcart\templates\order.html:37
+msgid "Box Size:"
+msgstr "Tamaño de la Caja:"
+
+#: .\shoppingcart\templates\order.html:39
+msgid "Small box: maximum 10 products"
+msgstr "Caja pequeña: máximo 10 productos"
+
+#: .\shoppingcart\templates\order.html:41
+msgid "Medium box: maximum 20 products"
+msgstr "Caja mediana: máximo 20 productos"
+
+#: .\shoppingcart\templates\order.html:43
+msgid "Large box: maximum 30 products"
+msgstr "Caja grande: máximo 30 productos"
+
+#: .\shoppingcart\templates\order.html:46
+msgid "Total to pay:"
+msgstr "Total a pagar:"
+
+#: .\shoppingcart\templates\order.html:49
+msgid "Confirm Order"
+msgstr "Confirmar Pedido"
+
+#: .\shoppingcart\templates\order.html:51
+msgid "Cancel Order"
+msgstr "Cancelar Pedido"
+
+#: .\shoppingcart\templates\order.html:52
+msgid "Continue Shopping"
+msgstr "Continuar Comprando"
+
+#: .\shoppingcart\templates\order_confirmation.html:6
+msgid "Order Confirmation"
+msgstr "Confirmación del Pedido"
+
+#: .\shoppingcart\templates\order_confirmation.html:7
+msgid "Thank you for your purchase!"
+msgstr "¡Gracias por su compra!"
+
+#: .\shoppingcart\templates\order_confirmation.html:13
+msgid "Your order has been processed successfully."
+msgstr "Su pedido ha sido procesado con éxito."
+
+#: .\shoppingcart\templates\order_confirmation.html:18
+msgid "Go back to the home to continue shopping."
+msgstr "Vuelve al inicio para seguir comprando."
+
+#: .\shoppingcart\templates\order_confirmation.html:20
+msgid "Back to Home"
+msgstr "Volver al Inicio"
+
+#: .\users\forms.py:9
+msgid "Email"
+msgstr "Correo electrónico"
+
+#: .\users\forms.py:14
+msgid "Phone number"
+msgstr "Numero de telefono"
+
+#: .\users\forms.py:18
+msgid "Address"
+msgstr "Direccion"
+
+#: .\users\forms.py:22
+msgid "Password"
+msgstr " Contraseña "
+
+#: .\users\forms.py:28
+msgid "Password confirmation"
+msgstr "Confirmación de Contraseña"
+
+#: .\users\forms.py:31
+msgid "Enter the same password as before, for verification."
+msgstr "Introduzca la misma contraseña que antes, para la verificación."
+
+#: .\users\forms.py:42
+msgid "Is staff"
+msgstr "Es staff"
+
+#: .\users\templates\templates\base.html:9
+#: .\users\templates\templates\home.html:9
+msgid " Home "
+msgstr " Inicio "
+
+#: .\users\templates\templates\base.html:28
+msgid " See products "
+msgstr " Ver productos "
+
+#: .\users\templates\templates\base.html:32
+msgid " Search products, brands and more... "
+msgstr " Buscar productos, marcas y más... "
+
+#: .\users\templates\templates\base.html:40
+msgid " Shopping Cart "
+msgstr " Carrito de Compras "
+
+#: .\users\templates\templates\base.html:42
+msgid " Log out "
+msgstr " Cerrar sesión "
+
+#: .\users\templates\templates\base.html:44
+msgid " Sign in "
+msgstr " Iniciar sesión "
+
+#: .\users\templates\templates\base.html:45
+#: .\users\templates\userTemplates\singupUser.html:21
+msgid " Sing up "
+msgstr " Registrarse "
+
+#: .\users\templates\templates\base.html:49
+#| msgid " List of Users "
+msgid " List of users "
+msgstr " Lista de usuarios "
+
+#: .\users\templates\templates\base.html:66
+msgid " © 2024 CountryBox. All rights reserved. "
+msgstr " © 2024 CountryBox. Todos los derechos reservados. "
+
+#: .\users\templates\templates\home.html:51
+msgid " Our recommended "
+msgstr " Nuestros recomendados "
+
+#: .\users\templates\templates\home.html:61
+#: .\users\templates\templates\home.html:72
+#: .\users\templates\templates\home.html:83
+msgid " Details "
+msgstr " Detalles "
+
+#: .\users\templates\userTemplates\listUser.html:5
+msgid "List of Users"
+msgstr " Lista de usuarios "
+
+#: .\users\templates\userTemplates\listUser.html:18
+#| msgid "Is staff"
+msgid "is_staff"
+msgstr "Es staff"
+
+#: .\users\templates\userTemplates\listUser.html:19
+msgid "Is Staff"
+msgstr "Es staff"
+
+#: .\users\templates\userTemplates\listUser.html:22
+msgid "Update"
+msgstr "Actualizar"
+
+#: .\users\templates\userTemplates\loginUser.html:8
+msgid " Email, phone or username "
+msgstr " Correo electrónico, teléfono o nombre de usuario "
+
+#: .\users\templates\userTemplates\loginUser.html:12
+msgid " Password "
+msgstr " Contraseña "
+
+#: .\users\templates\userTemplates\loginUser.html:16
+msgid " Continue "
+msgstr " Continuar "
+
+#: .\users\templates\userTemplates\loginUser.html:19
+msgid " Creat your account "
+msgstr " Crea tu cuenta "
+
+#: .\users\templates\userTemplates\logoutUser.html:5
+msgid " You have been logged out. "
+msgstr " Has cerrado sesión. "
+
+#: .\users\templates\userTemplates\singupUser.html:6
+msgid " Registration "
+msgstr " Registro "

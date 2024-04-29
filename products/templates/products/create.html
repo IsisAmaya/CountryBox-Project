@@ -1,10 +1,11 @@
 {% extends "templates/base.html" %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Crear Producto</title>
+  <title> {% trans " Create product " %}</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
   <style>
     .btn-custom {
@@ -24,7 +25,7 @@
       <div class="col-md-6">
         <div class="card">
           <div class="card-body">
-            <h3 class="card-title text-center mb-4">Crear Producto</h3>
+            <h3 class="card-title text-center mb-4"> {% trans " Create product " %}</h3>
             <form method="POST" enctype="multipart/form-data">
               {% csrf_token %}
               {% for field in form %}
@@ -44,7 +45,7 @@
                 </div>
               {% endfor %}
               <div class="d-grid">
-                <button type="submit" class="btn btn-custom">Guardar</button>
+                <button type="submit" class="btn btn-custom">{% trans " Save " %}</button>
               </div>
             </form>
           </div>

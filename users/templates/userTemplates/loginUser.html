@@ -1,21 +1,22 @@
 {% extends "templates/base.html" %}
+{% load i18n %}
 {% block content %}
 <div class="login-container">
     <form class="login-form" method="post">
         {% csrf_token %}
         <div class="mb-3">
-            <label for="username" class="form-label">E-mail, teléfono o usuario</label>
+            <label for="username" class="form-label">{% trans " Email, phone or username " %}</label>
             {{ form.username }}
         </div>
         <div class="mb-3">
-            <label for="password" class="form-label">Contraseña</label>
+            <label for="password" class="form-label">{% trans " Password " %}</label>
             {{ form.password }}
         </div>
         <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-block btn-primary">Continuar</button>
+            <button type="submit" class="btn btn-block btn-primary">{% trans " Continue " %}</button>
         </div>
         <div class="d-grid gap-2">
-            <a href="{% url 'singup' %}" class="btn btn-block btn-outline-secondary">Crea tu cuenta</a>
+            <a href="{% url 'singup' %}" class="btn btn-block btn-outline-secondary">{% trans " Creat your account " %}</a>
         </div>
     </form>
 </div>

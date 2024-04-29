@@ -1,18 +1,18 @@
 {% extends 'templates/base.html' %}
-
+{% load i18n %}
 {% block content %}
   {% if messages %}
     {% for message in messages %}
       <div class="alert alert-{{ message.tags }}">{{ message }}</div>
     {% endfor %}
   {% endif %}
-  <h1>Detalles de la orden</h1>
+  <h1>{% trans "Order Details" %}</h1>
   <table class="table">
     <thead>
       <tr>
-        <th>Producto</th>
-        <th>Cantidad</th>
-        <th>Precio</th>
+        <th>{% trans "Product" %}</th>
+        <th>{% trans "Quantity" %}</th>
+        <th>{% trans "Price" %}</th>
       </tr>
     </thead>
     <tbody>
@@ -24,31 +24,31 @@
         </tr>
       {% endfor %}
       <tr>
-        <td><b>Total</b></td>
+        <td><b>{% trans "Total" %}</b></td>
         <td>{{ total_quantity }}</td>
         <td><b>${{ total_price }}</b></td>
       </tr>
     </tbody>
   </table>
-  <h3>Información de entrega:</h3>
-  <p>Nombre: {{ customer.username }}</p>
-  <p>Dirección de entrega: {{ customer.address }}</p>
+  <h3>{% trans "Delivery Information:" %}</h3>
+  <p>{% trans "Name:" %} {{ customer.username }}</p>
+  <p>{% trans "Delivery Address:" %} {{ customer.address }}</p>
 
-  <h5>Tamaño de caja:</h5>
+  <h5>{% trans "Box Size:" %}</h5>
   {% if total_quantity <= 10 %}
-    <p>Caja pequeña: máximo 10 productos</p>
+    <p>{% trans "Small box: maximum 10 products" %}</p>
   {% elif total_quantity <= 20 %}
-    <p>Caja mediana: máximo 20 productos</p>
+    <p>{% trans "Medium box: maximum 20 products" %}</p>
   {% elif total_quantity <= 30 %}
-    <p>Caja grande: máximo 30 productos</p>
+    <p>{% trans "Large box: maximum 30 products" %}</p>
   {% endif %}
 
-  <p>Total a pagar: ${{ total_price }}</p>
+  <p>{% trans "Total to pay:" %} ${{ total_price }}</p>
   <form action="{% url 'cart:order_confirmation' %}" method="post" style="display: inline;">
     {% csrf_token %}
-    <button type="submit" class="btn btn-success">Confirmar Orden</button>
+    <button type="submit" class="btn btn-success">{% trans "Confirm Order" %}</button>
   </form>
-  <a href="{% url 'cart:cart' %}" class="btn btn-danger">Cancelar Orden</a>
-  <p><a href="{% url 'list' %}">Seguir comprando</a></p>
+  <a href="{% url 'cart:cart' %}" class="btn btn-danger">{% trans "Cancel Order" %}</a>
+  <p><a href="{% url 'list' %}">{% trans "Continue Shopping" %}</a></p>
 
 {% endblock %}

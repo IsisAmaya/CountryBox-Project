@@ -1,9 +1,9 @@
 {% extends "templates/base.html" %}
-
+{% load i18n %}
 {% block content %}
 <div class="login-container">
     <div class="login-form">
-        <h2 class="text-center">Registro</h2>
+        <h2 class="text-center"> {% trans " Registration " %}</h2>
         <form method="post">
             {% csrf_token %}
             {% for field in form %}
@@ -18,7 +18,7 @@
                 {% endfor %}
             </div>
             {% endfor %}
-            <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+            <button type="submit" class="btn btn-primary btn-block">{% trans " Sing up " %}</button>
         </form>
     </div>
 </div>

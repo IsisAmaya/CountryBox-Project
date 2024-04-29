@@ -1,19 +1,24 @@
 {% extends "templates/base.html" %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title> {% trans " List " %} </title>
 </head>
 {% block content %}
 <body>
-    <div class="row">        
-        <div class="col-4"><!-- Ordenar de mayor a menor -->
-        <a href="?orden=desc">Ordenar Descendente</a></div>
-        <div class="col-4"><!-- Ordenar de menor a mayor -->
-        <a href="?orden=asc">Ordenar Ascendente</a></div>
-    </div>
+    <div class="row">
+      <div class="col-4">
+          <!-- Ordenar de mayor a menor -->
+          <a href="?orden=desc">{% trans "Sort Descending" %}</a>
+      </div>
+      <div class="col-4">
+          <!-- Ordenar de menor a mayor -->
+          <a href="?orden=asc">{% trans "Sort Ascending" %}</a>
+      </div>
+  </div>
     <div class="container">
         <div class="row row-cols-1 row-cols-md-3 g-4">
           {% for product in products %}
@@ -22,16 +27,16 @@
                 <a href="{% url 'details' id=product.id %}">
                     <img src="{{ product.image_product.url }}" class="card-img-top" alt="{{ product.name }}">
                 </a>                
-              <div class="card-body">
-                <h5 class="card-title">{{ product.name }}</h5>
-                <p class="card-text">{{ product.description }}</p>
-                <p class="card-text"><strong>Country:</strong> {{ product.country }}</p>
-                <p class="card-text"><strong>Size:</strong> {{ product.size }}</p>
-                <p class="card-text"><strong>Price:</strong> {{ product.price }}</p>
-              </div>
-              <div class="card-footer mt-auto">
-                <a href="{% url 'details' id=product.id %}" class="btn bg-warning text-white">Detalles</a>
-              </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{ product.name }}</h5>
+                  <p class="card-text">{{ product.description }}</p>
+                  <p class="card-text"><strong>{% trans "Country:" %}</strong> {{ product.country }}</p>
+                  <p class="card-text"><strong>{% trans "Size:" %}</strong> {{ product.size }}</p>
+                  <p class="card-text"><strong>{% trans "Price:" %}</strong> {{ product.price }}</p>
+                </div>
+                <div class="card-footer mt-auto">
+                  <a href="{% url 'details' id=product.id %}" class="btn bg-warning text-white">{% trans "Details" %}</a>
+                </div>                
             </div>
           </div>
           {% endfor %}
