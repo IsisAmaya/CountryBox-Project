@@ -30,11 +30,12 @@
       </tr>
     </tbody>
   </table>
-  <h3>{% trans "Delivery Information:" %}</h3>
+  
+  <h3 style="margin-top: 20px;">{% trans "Delivery Information:" %}</h3>
   <p>{% trans "Name:" %} {{ customer.username }}</p>
   <p>{% trans "Delivery Address:" %} {{ customer.address }}</p>
 
-  <h5>{% trans "Box Size:" %}</h5>
+  <h5 style="margin-top: 20px;">{% trans "Box Size:" %}</h5>
   {% if total_quantity <= 10 %}
     <p>{% trans "Small box: maximum 10 products" %}</p>
   {% elif total_quantity <= 20 %}
@@ -43,12 +44,75 @@
     <p>{% trans "Large box: maximum 30 products" %}</p>
   {% endif %}
 
-  <p>{% trans "Total to pay:" %} ${{ total_price }}</p>
-  <form action="{% url 'cart:order_confirmation' %}" method="post" style="display: inline;">
+  <p style="margin-top: 20px;">{% trans "Total to pay:" %} ${{ total_price }}</p>
+
+  <form method="post" action="{% url 'cart:order' %}">
     {% csrf_token %}
-    <button type="submit" class="btn btn-success">{% trans "Confirm Order" %}</button>
+    <div style="margin-top: 20px;">
+      <label for="address">{% trans "Address" %}</label>
+      <input type="text" id="address" name="address" required>
+    </div>
+
+    <h5 style="margin-top: 20px;">{% trans "Payment Method" %}</h5>
+    <div style="margin-top: 10px;">
+      <label>
+        <input type="radio" name="payment_method" value="Cash" checked> {% trans "Cash" %}
+      </label>
+      <label>
+        <input type="radio" name="payment_method" value="Card"> {% trans "Card" %}
+      </label>
+    </div>
+
+    <div id="card-details" style="display: none; margin-top: 20px;">
+      <div style="margin-top: 10px;">
+        <label for="card_number">{% trans "Card Number" %}</label>
+        <input type="text" id="card_number" name="card_number">
+      </div>
+      <div style="margin-top: 10px;">
+        <label for="card_expiration_date">{% trans "Expiration Date" %}</label>
+        <input type="text" id="card_expiration_date" name="card_expiration_date">
+      </div>
+      <div style="margin-top: 10px;">
+        <label for="card_holder">{% trans "Card Holder" %}</label>
+        <input type="text" id="card_holder" name="card_holder">
+      </div>
+      <div style="margin-top: 10px;">
+        <label for="card_bank">{% trans "Bank" %}</label>
+        <input type="text" id="card_bank" name="card_bank">
+      </div>
+      <div style="margin-top: 10px;">
+        <label for="card_cvv">{% trans "CVV" %}</label>
+        <input type="text" id="card_cvv" name="card_cvv">
+      </div>
+    </div>
+
+    <div class="form-buttons" style="margin-top: 20px;">
+      <button type="submit" class="btn btn-success" style="margin-right: 10px;">{% trans "Confirm Order" %}</button>
+      <a href="{% url 'cart:cart' %}" class="btn btn-danger">{% trans "Cancel Order" %}</a>
+    </div>
   </form>
-  <a href="{% url 'cart:cart' %}" class="btn btn-danger">{% trans "Cancel Order" %}</a>
   <p><a href="{% url 'list' %}">{% trans "Continue Shopping" %}</a></p>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const paymentMethodRadios = document.querySelectorAll('input[name="payment_method"]');
+        const cardDetails = document.getElementById('card-details');
+
+        paymentMethodRadios.forEach(radio => {
+            radio.addEventListener('change', function () {
+                if (this.value === 'Card') {
+                    cardDetails.style.display = 'block';
+                } else {
+                    cardDetails.style.display = 'none';
+                }
+            });
+        });
+
+        // Initial check
+        const selectedPaymentMethod = document.querySelector('input[name="payment_method"]:checked');
+        if (selectedPaymentMethod && selectedPaymentMethod.value === 'Card') {
+            cardDetails.style.display = 'block';
+        }
+    });
+  </script>
 {% endblock %}

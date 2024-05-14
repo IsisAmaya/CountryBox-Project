@@ -6,6 +6,7 @@ from products.models import Product
 from users.models import CustomUser
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from .forms import PaymentForm
 
 
 @login_required
@@ -49,10 +50,19 @@ def order(request):
     cart_items = CartItem.objects.filter(cart=cart.pk)
     total_cart = sum(item.get_total_price() for item in cart_items)
     total_quantity = ShoppingCart.get_total_quantity(cart.items.all())
-    
 
     if request.method == "POST":
-        address = request.POST["address"]
+        address = request.POST.get("address")
+        payment_method = request.POST.get("payment_method")
+        
+        if payment_method == "Card":
+            card_number = request.POST.get("card_number")
+            card_expiration_date = request.POST.get("card_expiration_date")
+            card_holder = request.POST.get("card_holder")
+            card_bank = request.POST.get("card_bank")
+            card_cvv = request.POST.get("card_cvv")
+
+
         order = Order.objects.create(
             cart=cart,
             customer=customer,
@@ -67,12 +77,20 @@ def order(request):
                 quantity=item.quantity,
                 price=item.product.price,
             )
+
+
+        cart.items.all().delete()
         
         messages.success(request, "Your order has been created!")
         return redirect("cart:order_confirmation")
-    
-    
-    return render(request, "order.html", {"cart": cart, "cart_items": cart_items, 'customer': customer, "total_price": total_cart, 'total_quantity': total_quantity})
+
+    return render(request, "order.html", {
+        "cart": cart,
+        "cart_items": cart_items,
+        "customer": customer,
+        "total_price": total_cart,
+        "total_quantity": total_quantity
+    })
 
 
 @login_required
