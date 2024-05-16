@@ -33,29 +33,27 @@
   
   <h3 style="margin-top: 20px;">{% trans "Delivery Information:" %}</h3>
   <p>{% trans "Name:" %} {{ customer.username }}</p>
-  <p>{% trans "Delivery Address:" %} {{ customer.address }}</p>
-
-  <h5 style="margin-top: 20px;">{% trans "Box Size:" %}</h5>
-  {% if total_quantity <= 10 %}
-    <p>{% trans "Small box: maximum 10 products" %}</p>
-  {% elif total_quantity <= 20 %}
-    <p>{% trans "Medium box: maximum 20 products" %}</p>
-  {% elif total_quantity <= 30 %}
-    <p>{% trans "Large box: maximum 30 products" %}</p>
-  {% endif %}
-
-  <p style="margin-top: 20px;">{% trans "Total to pay:" %} ${{ total_price }}</p>
-
   <form method="post" action="{% url 'cart:order' %}">
     {% csrf_token %}
     <div style="margin-top: 20px;">
-      <label for="address">{% trans "Address" %}</label>
+      <label for="address">{% trans "Delivery Address" %}</label>
       <input type="text" id="address" name="address" required>
     </div>
 
+    <h5 style="margin-top: 20px;">{% trans "Box Size:" %}</h5>
+    {% if total_quantity <= 10 %}
+      <p>{% trans "Small box: maximum 10 products" %}</p>
+    {% elif total_quantity <= 20 %}
+      <p>{% trans "Medium box: maximum 20 products" %}</p>
+    {% elif total_quantity <= 30 %}
+      <p>{% trans "Large box: maximum 30 products" %}</p>
+    {% endif %}
+
+    <p style="margin-top: 20px;">{% trans "Total to pay:" %} ${{ total_price }}</p>
+
     <h5 style="margin-top: 20px;">{% trans "Payment Method" %}</h5>
     <div style="margin-top: 10px;">
-      <label>
+      <label style="margin-right: 20px;">
         <input type="radio" name="payment_method" value="Cash" checked> {% trans "Cash" %}
       </label>
       <label>
@@ -63,26 +61,26 @@
       </label>
     </div>
 
-    <div id="card-details" style="display: none; margin-top: 20px;">
+    <div id="card-details" style="display: none; margin-top: 20px; border: 1px solid #ddd; padding: 15px; border-radius: 5px; max-width: 25%;">
       <div style="margin-top: 10px;">
         <label for="card_number">{% trans "Card Number" %}</label>
-        <input type="text" id="card_number" name="card_number">
+        <input type="text" id="card_number" name="card_number" style="width: 100%;">
       </div>
       <div style="margin-top: 10px;">
         <label for="card_expiration_date">{% trans "Expiration Date" %}</label>
-        <input type="text" id="card_expiration_date" name="card_expiration_date">
+        <input type="text" id="card_expiration_date" name="card_expiration_date" style="width: 100%;">
       </div>
       <div style="margin-top: 10px;">
         <label for="card_holder">{% trans "Card Holder" %}</label>
-        <input type="text" id="card_holder" name="card_holder">
+        <input type="text" id="card_holder" name="card_holder" style="width: 100%;">
       </div>
       <div style="margin-top: 10px;">
         <label for="card_bank">{% trans "Bank" %}</label>
-        <input type="text" id="card_bank" name="card_bank">
+        <input type="text" id="card_bank" name="card_bank" style="width: 100%;">
       </div>
       <div style="margin-top: 10px;">
         <label for="card_cvv">{% trans "CVV" %}</label>
-        <input type="text" id="card_cvv" name="card_cvv">
+        <input type="text" id="card_cvv" name="card_cvv" style="width: 100%;">
       </div>
     </div>
 
