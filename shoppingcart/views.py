@@ -7,6 +7,8 @@ from users.models import CustomUser
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .forms import PaymentForm
+from .utils import OrderPDFGenerator
+from django.shortcuts import render
 
 
 @login_required
@@ -99,3 +101,39 @@ def order_confirmation(request):
     cart.items.all().delete()
 
     return render(request, "order_confirmation.html")
+
+# shoppingcart/views.py
+from django.http import HttpResponse
+from .utils import OrderPDFGenerator
+
+def order_pdf_view(request):
+    # Gather order details
+    order_details = {
+        'product': 'Maple Taffy',
+        'quantity': 1,
+        'price': 20000,
+        'total': 20000,
+        'customer_name': 'carlitos',
+        'delivery_address': 'Cll 100A Crr99B #312',
+        'box_size': 'Small box: maximum 10 products',
+        'total_price': 20000,
+    }
+
+    # Create the response object
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="order.pdf"'
+
+    # Create context
+    context = {
+        'response': response,
+        'order_details': order_details,
+        'filename': 'Order Details',
+    }
+
+    # Generate the PDF
+    pdf_generator = OrderPDFGenerator()
+    pdf_generator.generate(context)
+
+    return response
+
+

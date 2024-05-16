@@ -1,0 +1,13 @@
+<!-- users/templates/meal_detail.html -->
+{% extends "templates/base.html" %}
+
+{% block content %}
+<h1>{{ meal.strMeal }}</h1>
+<img src="{{ meal.strMealThumb }}" alt="{{ meal.strMeal }}" style="width:300px;height:300px;">
+<p>{{ meal.strInstructions }}</p>
+<ul>
+    {% for item in ingredients %}
+        <li>{{ item.ingredient }} - {{ item.measure }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

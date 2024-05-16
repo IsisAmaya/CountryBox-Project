@@ -1,0 +1,14 @@
+<!-- users/templates/recipes.html -->
+{% extends "templates/base.html" %}
+{% block content %}
+<div class="recipes-container">
+    <h1 class="recipes-title">Recetas</h1>
+    <ul class="recipes-list">
+        {% for category in categories.categories %}
+            <li class="recipes-item">
+                <a href="{% url 'category_detail' category.strCategory %}" class="recipes-link">{{ category.strCategory }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

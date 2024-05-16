@@ -8,6 +8,9 @@ from shoppingcart.models import Cart
 from products.models import Product
 from .models import CustomUser
 import random as rd
+from .services import list_all_categories, get_meals_by_category, get_meal_details
+
+
 
 
 def home_view(request):
@@ -76,3 +79,24 @@ def UserList(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
+
+def recipes_view(request):
+    categories = list_all_categories()
+    return render(request, 'templates/recipes.html', {'categories': categories})
+
+def category_detail_view(request, category_name):
+    meals = get_meals_by_category(category_name)
+    return render(request, 'templates/category_detail.html', {'meals': meals, 'category_name': category_name})
+
+def meal_detail_view(request, meal_id):
+    meal = get_meal_details(meal_id)
+    meal_data = meal['meals'][0]
+    
+    ingredients = []
+    for i in range(1, 21):  # TheMealDB API provides up to 20 ingredients
+        ingredient = meal_data.get(f'strIngredient{i}')
+        measure = meal_data.get(f'strMeasure{i}')
+        if ingredient:
+            ingredients.append({'ingredient': ingredient, 'measure': measure})
+    
+    return render(request, 'templates/meal_detail.html', {'meal': meal_data, 'ingredients': ingredients})

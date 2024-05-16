@@ -1,0 +1,18 @@
+<!-- users/templates/category_detail.html -->
+{% extends "templates/base.html" %}
+
+{% block content %}
+<div class="category-container">
+    <h1 class="category-title">{{ category_name }}</h1>
+    <div class="meals-list">
+        {% for meal in meals.meals %}
+            <div class="meal-item">
+                <a href="{% url 'meal_detail' meal.idMeal %}" class="meal-link">
+                    <img src="{{ meal.strMealThumb }}" alt="{{ meal.strMeal }}" class="meal-thumb">
+                    <p class="meal-name">{{ meal.strMeal }}</p>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

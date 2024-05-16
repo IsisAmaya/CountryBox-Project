@@ -145,4 +145,103 @@
             margin-top: 1rem;
         }
         
-        
+        /* Estilos para la página de recetas */
+    .recipes-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .recipes-title {
+        font-size: 2em;
+        margin-bottom: 20px;
+        color: #333;
+        text-align: center;
+    }
+
+    .recipes-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .recipes-item {
+        margin-bottom: 10px;
+    }
+
+    .recipes-link {
+        display: block;
+        padding: 10px 15px;
+        background-color: #fff;
+        border-radius: 4px;
+        color: #007bff;
+        text-decoration: none;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .recipes-link:hover {
+        background-color: #007bff;
+        color: #fff;
+    }
+    /* Estilos para la página de detalles de la categoría */
+    .category-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .category-title {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        color: #333;
+        text-align: center;
+    }
+
+    .meals-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .meal-item {
+        flex: 1 1 calc(25% - 20px);
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+
+    .meal-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .meal-link {
+        text-decoration: none;
+        color: #333;
+        display: block;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .meal-thumb {
+        width: 100%;
+        height: auto;
+        border-bottom: 1px solid #eee;
+    }
+
+    .meal-name {
+        font-size: 1.2em;
+        margin-top: 10px;
+        color: #007bff;
+        transition: color 0.3s ease;
+    }
+
+    .meal-name:hover {
+        color: #0056b3;
+    }
