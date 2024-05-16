@@ -1,8 +1,9 @@
 <!-- users/templates/recipes.html -->
 {% extends "templates/base.html" %}
 {% block content %}
+{% load i18n %}
 <div class="recipes-container">
-    <h1 class="recipes-title">Recetas</h1>
+    <h1 class="recipes-title">{% trans " Recipes " %}</h1>
     <ul class="recipes-list">
         {% for category in categories.categories %}
             <li class="recipes-item">

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-28 01:09-0500\n"
+"POT-Creation-Date: 2024-05-15 21:44-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,7 +72,7 @@ msgstr "Precio"
 
 #: .\products\templates\products\create.html:8
 #: .\products\templates\products\create.html:28
-#: .\users\templates\templates\base.html:48
+#: .\users\templates\templates\base.html:49
 msgid " Create product "
 msgstr " Crear producto "
 
@@ -153,7 +153,7 @@ msgid "User Information:"
 msgstr "Información del Usuario:"
 
 #: .\shoppingcart\templates\cart.html:11
-#: .\shoppingcart\templates\order.html:34
+#: .\shoppingcart\templates\order.html:35
 msgid "Name:"
 msgstr "Nombre:"
 
@@ -196,45 +196,85 @@ msgstr "Detalles del Pedido"
 msgid "Total"
 msgstr "Total"
 
-#: .\shoppingcart\templates\order.html:33
+#: .\shoppingcart\templates\order.html:34
 msgid "Delivery Information:"
 msgstr "Información de Entrega:"
 
-#: .\shoppingcart\templates\order.html:35
+#: .\shoppingcart\templates\order.html:36
 msgid "Delivery Address:"
 msgstr "Dirección de Entrega:"
 
-#: .\shoppingcart\templates\order.html:37
+#: .\shoppingcart\templates\order.html:38
 msgid "Box Size:"
 msgstr "Tamaño de la Caja:"
 
-#: .\shoppingcart\templates\order.html:39
+#: .\shoppingcart\templates\order.html:40
 msgid "Small box: maximum 10 products"
 msgstr "Caja pequeña: máximo 10 productos"
 
-#: .\shoppingcart\templates\order.html:41
+#: .\shoppingcart\templates\order.html:42
 msgid "Medium box: maximum 20 products"
 msgstr "Caja mediana: máximo 20 productos"
 
-#: .\shoppingcart\templates\order.html:43
+#: .\shoppingcart\templates\order.html:44
 msgid "Large box: maximum 30 products"
 msgstr "Caja grande: máximo 30 productos"
 
-#: .\shoppingcart\templates\order.html:46
+#: .\shoppingcart\templates\order.html:47
 msgid "Total to pay:"
 msgstr "Total a pagar:"
 
-#: .\shoppingcart\templates\order.html:49
+#: .\shoppingcart\templates\order.html:52 .\users\forms.py:18
+msgid "Address"
+msgstr "Direccion"
+
+#: .\shoppingcart\templates\order.html:56
+msgid "Payment Method"
+msgstr "Metodo de Pago"
+
+#: .\shoppingcart\templates\order.html:59
+msgid "Cash"
+msgstr "Efectivo"
+
+#: .\shoppingcart\templates\order.html:62
+msgid "Card"
+msgstr "Tarjeta"
+
+#: .\shoppingcart\templates\order.html:68
+msgid "Card Number"
+msgstr "Numero de tarjeta"
+
+#: .\shoppingcart\templates\order.html:72
+msgid "Expiration Date"
+msgstr "Fecha de caducidad"
+
+#: .\shoppingcart\templates\order.html:76
+msgid "Card Holder"
+msgstr "Titular de la tarjeta"
+
+#: .\shoppingcart\templates\order.html:80
+msgid "Bank"
+msgstr "Banco"
+
+#: .\shoppingcart\templates\order.html:84
+msgid "CVV"
+msgstr "CVV"
+
+#: .\shoppingcart\templates\order.html:90
 msgid "Confirm Order"
 msgstr "Confirmar Pedido"
 
-#: .\shoppingcart\templates\order.html:51
+#: .\shoppingcart\templates\order.html:91
 msgid "Cancel Order"
 msgstr "Cancelar Pedido"
 
-#: .\shoppingcart\templates\order.html:52
+#: .\shoppingcart\templates\order.html:94
 msgid "Continue Shopping"
 msgstr "Continuar Comprando"
+
+#: .\shoppingcart\templates\order.html:118
+msgid "Download PDF"
+msgstr "Descargar PDF"
 
 #: .\shoppingcart\templates\order_confirmation.html:6
 msgid "Order Confirmation"
@@ -263,10 +303,6 @@ msgstr "Correo electrónico"
 #: .\users\forms.py:14
 msgid "Phone number"
 msgstr "Numero de telefono"
-
-#: .\users\forms.py:18
-msgid "Address"
-msgstr "Direccion"
 
 #: .\users\forms.py:22
 msgid "Password"
@@ -301,25 +337,28 @@ msgstr " Buscar productos, marcas y más... "
 msgid " Shopping Cart "
 msgstr " Carrito de Compras "
 
-#: .\users\templates\templates\base.html:42
+#: .\users\templates\templates\base.html:41
+msgid "Recipes"
+msgstr "Recetas"
+
+#: .\users\templates\templates\base.html:43
 msgid " Log out "
 msgstr " Cerrar sesión "
 
-#: .\users\templates\templates\base.html:44
+#: .\users\templates\templates\base.html:45
 msgid " Sign in "
 msgstr " Iniciar sesión "
 
-#: .\users\templates\templates\base.html:45
+#: .\users\templates\templates\base.html:46
 #: .\users\templates\userTemplates\singupUser.html:21
 msgid " Sing up "
 msgstr " Registrarse "
 
-#: .\users\templates\templates\base.html:49
-#| msgid " List of Users "
+#: .\users\templates\templates\base.html:50
 msgid " List of users "
 msgstr " Lista de usuarios "
 
-#: .\users\templates\templates\base.html:66
+#: .\users\templates\templates\base.html:67
 msgid " © 2024 CountryBox. All rights reserved. "
 msgstr " © 2024 CountryBox. Todos los derechos reservados. "
 
@@ -333,12 +372,15 @@ msgstr " Nuestros recomendados "
 msgid " Details "
 msgstr " Detalles "
 
+#: .\users\templates\templates\recipes.html:5
+msgid " Recipes "
+msgstr "Recetas"
+
 #: .\users\templates\userTemplates\listUser.html:5
 msgid "List of Users"
 msgstr " Lista de usuarios "
 
 #: .\users\templates\userTemplates\listUser.html:18
-#| msgid "Is staff"
 msgid "is_staff"
 msgstr "Es staff"
 

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "shoppingcart",
     "products",
     "rest_framework",
+    'modeltranslation',
 ]
 
 MIDDLEWARE = [
@@ -120,6 +121,8 @@ LANGUAGES = [
     ('es', "Spanish"),
     ("ru", "Russian"),
 ]
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
 
 TIME_ZONE = "UTC"
 
