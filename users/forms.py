@@ -33,7 +33,7 @@ class UserSingupForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = CustomUser
-        fields = ['username','email', 'phone_number','address' ,'password1', 'password2','is_staff']
+        fields = ['username','email', 'phone_number','address' ,'password1', 'password2']
         help_texts={k:"" for k in fields}
 
 
